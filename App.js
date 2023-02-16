@@ -1,29 +1,37 @@
 import { StatusBar  } from 'expo-status-bar';
-import { StyleSheet, Text, ImageBackground, View } from 'react-native';
+import { StyleSheet, ImageBackground, View, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, 
+  Platform } from 'react-native';
 import React from "react";
+import RegistrationScreen from './Screens/RegistrationScreen/RegistrationScreen';
 
-const image = {uri: 'https://reactjs.org/logo-og.png'};
-const backImage = require('./Photo_BG.png') ;
+const backImage = require('./Source/Photo_BG.png');
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ImageBackground source={backImage} style={{width: 700, height: 700}}>
-        <Text style={styles.textinc}>Hello!!!</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
+    <View style={styles.maincontainer}>
+      <ImageBackground source={backImage} style={styles.backImg} >
+        <RegistrationScreen/>
+        <StatusBar style="auto" />
       </ImageBackground>
-      <StatusBar style="auto" />
     </View>
+
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  maincontainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   }, 
-  textinc :{
-    fontWeight:'900',
-    color: "#20232a"
-  }
+  backImg: {
+    flex: 1,
+    resizeMode: 'cover',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+   }
 });
