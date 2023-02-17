@@ -8,6 +8,7 @@ const buttonImg = require('./add.png');
 
 const RegistrationScreen = () => {
    return (
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB }>
       <View style={ styles.container }>
         <View style={ styles.pfotoContainer }>
            <TouchableOpacity style={ styles.addbutton } activeOpacity={0.5}>
@@ -15,15 +16,16 @@ const RegistrationScreen = () => {
            </TouchableOpacity>
         </View>
         <Text style={ styles.title }>Регистрация</Text>
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
+        
         <TextInput style={ styles.inputLogin } placeholder="Login" inputMode="text"></TextInput>
         <TextInput style={ styles.inputMailPassw } placeholder="Email address" inputMode="email"></TextInput>
         <TextInput style={ styles.inputMailPassw } placeholder="Password" inputMode=""></TextInput>
-        </KeyboardAvoidingView>
+        
         <TouchableOpacity style={ styles.passwShow } activeOpacity={0.5}>
              <Text style={ styles.passwShowText }>Show</Text>
         </TouchableOpacity>       
       </View>
+    </KeyboardAvoidingView> 
    )
 };
 
@@ -37,6 +39,10 @@ const styles = StyleSheet.create({
       width: '100%',
       borderTopRightRadius: 25,
       borderTopLeftRadius:25,
+    },
+    containerKeyB: {
+      flex:1,
+      width:'100%'
     },
     pfotoContainer: {
       marginTop: -60,

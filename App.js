@@ -8,16 +8,14 @@ const backImage = require('./Source/Photo_BG.png');
 
 export default function App() {
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.maincontainer}>
       <ImageBackground source={backImage} style={styles.backImg} >
         <RegistrationScreen/>
         <StatusBar style="auto" />
       </ImageBackground>
     </View>
-
-    </TouchableWithoutFeedback>
+  </TouchableWithoutFeedback>
   );
 }
 
