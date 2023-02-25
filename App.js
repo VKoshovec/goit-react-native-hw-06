@@ -1,10 +1,10 @@
 import { StatusBar  } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, { useState } from "react";
-import RegistrationScreen from './Screens/RegistrationScreen/RegistrationScreen';
-import LoginScreen from './Screens/LoginScreen/LoginScreen';
+import RegistrationScreen from './src/Screens/RegistrationScreen/RegistrationScreen';
+import LoginScreen from './src/Screens/LoginScreen/LoginScreen';
 
-const backImage = require('./Source/Photo_BG.png');
+const backImage = require('./src/Source/Photo_BG.png');
 
 export default function App() {
 
