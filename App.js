@@ -14,32 +14,13 @@ export default function App() {
 
   return (
   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-     {/* <View style={styles.maincontainer}>
-        <ImageBackground source={backImage} style={styles.backImg}> */}
-          <NavigationContainer style={styles.maincontainer}>
-            <MainStrack.Navigator initialRouteName='Registratione' >
+          <NavigationContainer>
+            <MainStrack.Navigator initialRouteName='Login' screenOptions={{headerShown: false}}>
               {/* <PostsScreen/> */}
-              {/* <LoginScreen/>  */}
               <MainStrack.Screen name='Login' component={LoginScreen}/>
               <MainStrack.Screen name='Registratione' component={RegistrationScreen}/>
-              {/* <RegistrationScreen/> */}
             </MainStrack.Navigator>
           </NavigationContainer>
-        {/* </ImageBackground>
-       <StatusBar style="auto" />  
-     </View> */}
    </TouchableWithoutFeedback>
   );
-}
-
-const styles = StyleSheet.create({
-  maincontainer: {
-    flex: 1,
-    alignItems: 'center',
-  }, 
-  // backImg: {
-  //   flex: 1,
-  //   justifyContent: 'flex-end',
-  //   width: '100%'
-  // },
-});
+};

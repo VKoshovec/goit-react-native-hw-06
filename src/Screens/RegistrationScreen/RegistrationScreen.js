@@ -2,10 +2,12 @@ import { StyleSheet, Text, ImageBackground,
    View, TouchableOpacity, TextInput, KeyboardAvoidingView, 
    Platform } from "react-native";
 import React, { useState } from "react";
+import { StatusBar  } from 'expo-status-bar';
+const backImage = require('../../Source/Photo_BG.png');
 
 const buttonImg = require('./add.png');
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ navigation }) => {
 
    const [login, setLogin] =useState('');
    const [mail, setMail] =useState('');
@@ -23,6 +25,8 @@ const RegistrationScreen = () => {
    const passwShow =()=> alert(`Your password is: ${password}`);
 
    return (
+    <View style={styles.maincontainer}>
+    <ImageBackground source={backImage} style={styles.backImg}>
     <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >
       <View style={ styles.container }>
         <View style={ styles.pfotoContainer }>
@@ -44,16 +48,28 @@ const RegistrationScreen = () => {
           <Text style={ styles.registerButtonText }>Register</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5}>
+        <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5} onPress={() => navigation.navigate("Login")}>
              <Text style={ styles.loginLinkText }>Already have an account? Log in</Text>
         </TouchableOpacity> 
 
       </View>
      </KeyboardAvoidingView> 
+     </ImageBackground>
+  <StatusBar style="auto" />  
+</View>
    )
 };
 
 const styles = StyleSheet.create({
+  maincontainer: {
+    flex: 1,
+    alignItems: 'center',
+  }, 
+  backImg: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    width: '100%'
+  },
     container: {
       backgroundColor: '#FFFFFF',
       alignItems: 'center',

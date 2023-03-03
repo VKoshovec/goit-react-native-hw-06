@@ -3,10 +3,10 @@ import { StyleSheet, Text, ImageBackground,
    Platform } from "react-native";
 import React, { useState } from "react";
 import { StatusBar  } from 'expo-status-bar';
-const backImage = require('./Photo_BG.png');
+const backImage = require('../../Source/Photo_BG.png');
 
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 
    const [mail, setMail] =useState('');
    const [password, setPassword] =useState('');
@@ -26,26 +26,27 @@ const LoginScreen = () => {
       <View style={styles.maincontainer}>
         <ImageBackground source={backImage} style={styles.backImg}>
           <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >
-      {/* <View style={ styles.container }>
+             <View style={ styles.container }>
 
-        <Text style={ styles.title }>Login</Text>
+                <Text style={ styles.title }>Login</Text>
   
-        <TextInput style={ styles.inputMailPassw } placeholder="Email address" inputMode="email" value={ mail }  onChangeText={handleMail}/>
-        <TextInput style={ styles.inputMailPassw } placeholder="Password" secureTextEntry={true} value={ password }  onChangeText={handlePassword}/>
+                <TextInput style={ styles.inputMailPassw } placeholder="Email address" inputMode="email" value={ mail }  onChangeText={handleMail}/>
+                <TextInput style={ styles.inputMailPassw } placeholder="Password" secureTextEntry={true} value={ password }  onChangeText={handlePassword}/>
         
-        <TouchableOpacity style={ styles.passwShow } activeOpacity={0.5} onPress={passwShow}>
-             <Text style={ styles.passwShowText }>Show</Text>
-        </TouchableOpacity>  
+                <TouchableOpacity style={ styles.passwShow } activeOpacity={0.5} onPress={passwShow}>
+                  <Text style={ styles.passwShowText }>Show</Text>
+                </TouchableOpacity>  
 
-        <TouchableOpacity style={ styles.registerButton } activeOpacity={0.5} onPress={register}>
-          <Text style={ styles.registerButtonText }>Login</Text>
-        </TouchableOpacity>
+                <TouchableOpacity style={ styles.registerButton } activeOpacity={0.5} onPress={register}>
+                  <Text style={ styles.registerButtonText }>Login</Text>
+                </TouchableOpacity>
 
-        <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5}>
-             <Text style={ styles.loginLinkText }>Don't have an account? Register</Text>
-        </TouchableOpacity> 
+                <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5} onPress={() => navigation.navigate("Registratione")}>
+                  <Text style={ styles.loginLinkText }>Don't have an account? Register</Text>
+                </TouchableOpacity> 
 
-      </View> */}
+              </View>
+
             </KeyboardAvoidingView> 
           </ImageBackground>
        <StatusBar style="auto" />  
