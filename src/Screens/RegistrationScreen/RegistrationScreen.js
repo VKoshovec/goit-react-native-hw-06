@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 const buttonImg = require('./add.png');
 
-const RegistrationScreen = ({changeScrenn}) => {
+const RegistrationScreen = () => {
 
    const [login, setLogin] =useState('');
    const [mail, setMail] =useState('');
@@ -44,7 +44,7 @@ const RegistrationScreen = ({changeScrenn}) => {
           <Text style={ styles.registerButtonText }>Register</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5} onPress={() => changeScrenn(0) }>
+        <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5}>
              <Text style={ styles.loginLinkText }>Already have an account? Log in</Text>
         </TouchableOpacity> 
 

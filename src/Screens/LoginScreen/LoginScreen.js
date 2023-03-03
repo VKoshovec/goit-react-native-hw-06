@@ -2,8 +2,11 @@ import { StyleSheet, Text, ImageBackground,
    View, TouchableOpacity, TextInput, KeyboardAvoidingView, 
    Platform } from "react-native";
 import React, { useState } from "react";
+import { StatusBar  } from 'expo-status-bar';
+const backImage = require('./Photo_BG.png');
 
-const LoginScreen = ({changeScrenn}) => {
+
+const LoginScreen = () => {
 
    const [mail, setMail] =useState('');
    const [password, setPassword] =useState('');
@@ -19,8 +22,11 @@ const LoginScreen = ({changeScrenn}) => {
    const passwShow =()=> alert(`Your password is: ${password}`);
 
    return (
-    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >
-      <View style={ styles.container }>
+    
+      <View style={styles.maincontainer}>
+        <ImageBackground source={backImage} style={styles.backImg}>
+          <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >
+      {/* <View style={ styles.container }>
 
         <Text style={ styles.title }>Login</Text>
   
@@ -35,16 +41,29 @@ const LoginScreen = ({changeScrenn}) => {
           <Text style={ styles.registerButtonText }>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5}  onPress={()=>changeScrenn(1)} >
+        <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5}>
              <Text style={ styles.loginLinkText }>Don't have an account? Register</Text>
         </TouchableOpacity> 
 
-      </View>
-     </KeyboardAvoidingView> 
+      </View> */}
+            </KeyboardAvoidingView> 
+          </ImageBackground>
+       <StatusBar style="auto" />  
+     </View>
+
    )
 };
 
 const styles = StyleSheet.create({
+  maincontainer: {
+    flex: 1,
+    alignItems: 'center',
+  }, 
+  backImg: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    width: '100%'
+  },
     container: {
       backgroundColor: '#FFFFFF',
       alignItems: 'center',
