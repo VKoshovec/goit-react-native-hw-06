@@ -33,36 +33,37 @@ const Home = () => {
     return (
         <BottomTabs.Navigator screenOptions={{
             tabBarShowLabel: false,
+            tabBarStyle: { height: 80 }
             }}>
 
                 {/* GRID */}
                 <BottomTabs.Screen 
                    options={{
                    tabBarIcon: () =>{
-                   return <SimpleLineIcons name="grid" size={24} color="gray" />
+                   return <SimpleLineIcons name="grid" size={20} color="gray" />
                    },
                    headerTitleAlign:"center"
                 }} name='MapScreen' component={MapScreen}/>
 
                 {/* ADD BUTTON */}
                 <BottomTabs.Screen  options={{
-                   tabBarIcon: () =>{
-                   return <TouchableOpacity style={ styles.addButton } activeOpacity={0.5}>
+                   tabBarIcon: () => {
+                   return <View style={ styles.addButton } activeOpacity={0.5}>
                     <Text style={ styles.addButtonText }>+</Text>
-                    </TouchableOpacity>
+                    </View>
                    },
                    headerTitleAlign: "center",
                    headerRightContainerStyle: { paddingRight: 20 },
                    headerRight: () => (
                    <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5}>
-                      <Feather name="log-out" size={24} color="black" />
+                      <Feather name="log-out" size={24} color="gray" />
                    </TouchableOpacity>)
                 }} name='Posts' component={Posts}/>
              
                 {/* PROFILE BUTTON */}
                 <BottomTabs.Screen options={{
                    tabBarIcon: () =>{
-                   return <AntDesign name="user" size={24} color="gray" />
+                   return <AntDesign name="user" size={20} color="gray" />
                    },
                    headerTitleAlign:"center"
                 }} name='ProfileScreen' component={ProfileScreen}/>
