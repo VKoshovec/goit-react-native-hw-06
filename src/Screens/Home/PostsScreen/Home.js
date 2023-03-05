@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const BottomTabs = createBottomTabNavigator();
 
-function Posts() {
+function Posts({navigation}) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Posts</Text>
@@ -13,7 +13,7 @@ function Posts() {
     );
   };
   
-  function ProfileScreen() {
+  function ProfileScreen({navigation}) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>ProfileScreen</Text>
@@ -21,7 +21,7 @@ function Posts() {
     );
   };
   
-  function MapScreen() {
+  function MapScreen({navigation}) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>MapScreen</Text>
@@ -29,9 +29,9 @@ function Posts() {
     );
   };
 
-const Home = () => {
+const Home = ({ navigation }) => {
     return (
-        <BottomTabs.Navigator screenOptions={{
+        <BottomTabs.Navigator initialRouteName="Posts" screenOptions={{
             tabBarShowLabel: false,
             tabBarStyle: { height: 80 }
             }}>
@@ -48,14 +48,14 @@ const Home = () => {
                 {/* ADD BUTTON */}
                 <BottomTabs.Screen  options={{
                    tabBarIcon: () => {
-                   return <View style={ styles.addButton } activeOpacity={0.5}>
+                   return <TouchableOpacity style={ styles.addButton } activeOpacity={0.5} onPress={()=>navigation.navigate('CreatePostsScreen')}>
                     <Text style={ styles.addButtonText }>+</Text>
-                    </View>
+                    </TouchableOpacity>
                    },
                    headerTitleAlign: "center",
                    headerRightContainerStyle: { paddingRight: 20 },
                    headerRight: () => (
-                   <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5}>
+                   <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5} onPress={()=>navigation.navigate('Login')} >
                       <Feather name="log-out" size={24} color="gray" />
                    </TouchableOpacity>)
                 }} name='Posts' component={Posts}/>
