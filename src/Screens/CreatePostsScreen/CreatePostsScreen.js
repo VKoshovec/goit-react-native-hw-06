@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ImageBackground } from "react-native";
 import React from "react";
 import { EvilIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -39,7 +39,7 @@ const CreatePostsScreen = ({navigation}) => {
                    },
                    headerLeft: () => (
                     <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5}
-                     onPress={()=>navigation.navigate('Home', { screen: 'Posts' })} >
+                     onPress={()=>navigation.navigate('Home', { screen: 'PostsScreen' })} >
                        <Ionicons name="arrow-back-sharp" size={24} color="black" />
                     </TouchableOpacity>),
                     headerLeftContainerStyle: { paddingLeft: 10 },
@@ -84,9 +84,6 @@ const styles = StyleSheet.create({
     postForm:{
         flex: 3,
     },
-    // postName:{
-
-    // },
     postButton:{
       backgroundColor: '#E8E8E8',
       height: 50,

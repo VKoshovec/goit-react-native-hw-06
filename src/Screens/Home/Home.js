@@ -2,38 +2,17 @@ import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
 import React from "react";
 import { AntDesign, SimpleLineIcons, Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Post from "../../../Elements/Post";
+import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
+import PostsScreen from "../PostsScreen/PostsScreen";
+import ProfileScreen from "../ProfileScreen/ProfileScreen";
 
-const BottomTabs = createBottomTabNavigator();
-const postImg = require('../../../Source/Rectangle23.png');
 
-function Posts({navigation}) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Post img = { postImg } text={ "Forest" }/>
-      </View>
-    );
-  };
-  
-  function ProfileScreen({navigation}) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>ProfileScreen</Text>
-      </View>
-    );
-  };
-  
-  function MapScreen({navigation}) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>MapScreen</Text>
-      </View>
-    );
-  };
+const BottomTabs = createBottomTabNavigator(); 
 
 const Home = ({ navigation }) => {
     return (
-        <BottomTabs.Navigator initialRouteName="Posts" screenOptions={{
+        <BottomTabs.Navigator initialRouteName="Posts" 
+        screenOptions={{
             tabBarShowLabel: false,
             tabBarStyle: { height: 80 }
             }}>
@@ -41,11 +20,16 @@ const Home = ({ navigation }) => {
                 {/* GRID */}
                 <BottomTabs.Screen 
                    options={{
-                   tabBarIcon: () =>{
-                   return <SimpleLineIcons name="grid" size={20} color="gray" />
+                   tabBarIcon: ({focused,size, color}) =>{
+                   return <SimpleLineIcons name="grid" size={20} color={color} />
                    },
-                   headerTitleAlign:"center"
-                }} name='MapScreen' component={MapScreen}/>
+                   headerTitleAlign:"center",
+                   headerRightContainerStyle: { paddingRight: 20 },
+                   headerRight: () => (
+                    <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5} onPress={()=>navigation.navigate('Login')} >
+                       <Feather name="log-out" size={24} color="gray" />
+                    </TouchableOpacity>)
+                }} name='PostsScreen' component={PostsScreen}/>
 
                 {/* ADD BUTTON */}
                 <BottomTabs.Screen  options={{
@@ -54,22 +38,18 @@ const Home = ({ navigation }) => {
                     <Text style={ styles.addButtonText }>+</Text>
                     </TouchableOpacity>
                    },
+                   headerShown: false,
+                   tabBarStyle: { display: "none" },
                    headerTitleAlign: "center",
-                   headerRightContainerStyle: { paddingRight: 20 },
-                   headerRight: () => (
-                   <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5} onPress={()=>navigation.navigate('Login')} >
-                      <Feather name="log-out" size={24} color="gray" />
-                   </TouchableOpacity>)
-                }} name='Posts' component={Posts}/>
+                }} name='CreatePostsScreen' component={CreatePostsScreen}/>
              
                 {/* PROFILE BUTTON */}
                 <BottomTabs.Screen options={{
-                   tabBarIcon: () =>{
-                   return <AntDesign name="user" size={20} color="gray" />
+                   tabBarIcon: ({focused,size, color}) =>{
+                   return <AntDesign name="user" size={20} color={color} />
                    },
-                   headerTitleAlign:"center"
+                   headerShown: false,
                 }} name='ProfileScreen' component={ProfileScreen}/>
-
           </BottomTabs.Navigator>
     );   
 }
