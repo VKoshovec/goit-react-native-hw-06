@@ -20,7 +20,6 @@ const RegistrationScreen = ({ navigation }) => {
    const register =()=> {
     if (!login || !mail || !password) { alert("Enter all data pleace!!!"); return }
     navigation.navigate('Home', { screen: 'Posts' });
-    // console.log(`Login: ${login}, Email: ${ mail }, Password: ${password}`)
    }
 
    const passwShow =()=> alert(`Your password is: ${password}`);

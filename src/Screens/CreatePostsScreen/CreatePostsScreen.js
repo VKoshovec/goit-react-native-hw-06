@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import React from "react";
 import { EvilIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
     postForm:{
         flex: 3,
     },
-    postName:{
+    // postName:{
 
-    },
+    // },
     postButton:{
-      backgroundColor: '#FF6C00',
+      backgroundColor: '#E8E8E8',
       height: 50,
       width: 343, 
       justifyContent: "center",
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
        fontWeight: '400',
     },
     postName:{  
-    //    backgroundColor: '#F6F6F6',
        width: 343,
        height: 50,
        borderRadius: 8,

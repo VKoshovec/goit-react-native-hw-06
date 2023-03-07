@@ -2,13 +2,15 @@ import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
 import React from "react";
 import { AntDesign, SimpleLineIcons, Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Post from "../../../Elements/Post";
 
 const BottomTabs = createBottomTabNavigator();
+const postImg = require('../../../Source/Rectangle23.png');
 
 function Posts({navigation}) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Posts</Text>
+        <Post img = { postImg } text={ "Forest" }/>
       </View>
     );
   };
