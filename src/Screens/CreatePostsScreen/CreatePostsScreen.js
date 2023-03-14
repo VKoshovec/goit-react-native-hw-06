@@ -1,31 +1,62 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image} from "react-native";
 import React from "react";
+import { useState, useEffect, useRef } from "react";
 import { EvilIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Camera } from "expo-camera";
+import * as Location from "expo-location";
 
 const trashImg = require('./trash.png');
 
 const BottomTabs = createBottomTabNavigator();
 
 const  CreatePost =({navigation})=> { 
+
+    const [camera, setCamera] = useState(null);
+    const [photoi, setPhoto ]  = useState(null);
+    const [location, setLocation] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== "granted") {
+            console.log("Permission to access location was denied");
+          }
     
+          let locationPos = await Location.getCurrentPositionAsync({});
+          const coords = {
+            latitude: locationPos.coords.latitude,
+            longitude: locationPos.coords.longitude,
+          };
+          setLocation(coords);
+          console.log(location);
+        })();
+      }, [])
+
+
     const takePhoto = async() => {
-        photo = await Camera.take
+       const photo = await camera.takePictureAsync();
+       setPhoto(photo.uri);
     }
 
     return (
 <View style={ styles.postContainer }>
-   {/* <View style={ styles.postImg }> */}
-     <Camera style={ styles.postImg }></Camera>
-     <TouchableOpacity style={ styles.postImgAdd } activeOpacity={0.5}>
+
+     <Camera style={ styles.postImg } ref={setCamera}>
+        <Image
+              source={{ uri: photoi }}
+              style={{ height: 250, width: 250, justifyContent: 'flex-start', alignItems: 'flex-start' }}
+         />
+     </Camera>
+
+     <TouchableOpacity style={ styles.postImgAdd } activeOpacity={0.5} onPress={ takePhoto }>
          <FontAwesome name="camera" size={24} color="white" />
       </TouchableOpacity>
-   {/* </View> */}
+
    <Text style={ styles.postImgText }>Add photo</Text>
    <View style={ styles.postForm }>
       <TextInput style={ styles.postName } placeholder="Title..." inputMode="text" />
-      <TextInput style={ styles.postName } placeholder="Location" inputMode="navigation"/>
+      <TextInput style={ styles.postName } placeholder="Location" inputMode="navigation" value = {JSON.stringify(location.latitude)} />
       <TouchableOpacity style={ styles.postButton } activeOpacity={0.5}>
                   <Text style={ styles.postButtonText }>Publicate</Text>
       </TouchableOpacity>
@@ -75,15 +106,15 @@ const styles = StyleSheet.create({
     },
     postImg: {
         flex: 2,
-        width: '80%',
-        height: '40%',
+        width: '100%',
+        height: 600,
         color: '#F6F6F6',
         justifyContent: "center",
         alignItems: "center",
     },
     postImgAdd:{
         display: 'flex',
-        marginTop: -70,
+        marginTop: -80,
         width: 50,
         height: 50,
         borderRadius: 50,
@@ -95,6 +126,7 @@ const styles = StyleSheet.create({
     },
     postImgText: {
         alignItems: "flex-start",
+        color: "#fff"
     },
     postForm:{
         flex: 3,
@@ -125,7 +157,6 @@ const styles = StyleSheet.create({
        borderBottomColor: '#E8E8E8',
        borderBottomWidth: 2,
     },
-   
 });  
 
 export default CreatePostsScreen;
