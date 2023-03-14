@@ -2,17 +2,26 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, ImageBackground } 
 import React from "react";
 import { EvilIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Camera } from "expo-camera";
+
 const trashImg = require('./trash.png');
 
 const BottomTabs = createBottomTabNavigator();
 
-const  CreatePost =({navigation})=> { return (
+const  CreatePost =({navigation})=> { 
+    
+    const takePhoto = async() => {
+        photo = await Camera.take
+    }
+
+    return (
 <View style={ styles.postContainer }>
-   <View style={ styles.postImg }>
-      <TouchableOpacity style={ styles.postImgAdd } activeOpacity={0.5}>
-         <FontAwesome name="camera" size={24} color="black" />
+   {/* <View style={ styles.postImg }> */}
+     <Camera style={ styles.postImg }></Camera>
+     <TouchableOpacity style={ styles.postImgAdd } activeOpacity={0.5}>
+         <FontAwesome name="camera" size={24} color="white" />
       </TouchableOpacity>
-   </View>
+   {/* </View> */}
    <Text style={ styles.postImgText }>Add photo</Text>
    <View style={ styles.postForm }>
       <TextInput style={ styles.postName } placeholder="Title..." inputMode="text" />
@@ -73,10 +82,16 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     postImgAdd:{
-        width: 40,
-        height: 40,
-        borderRadius: 100,
-        color: '#FFFFFF',
+        display: 'flex',
+        marginTop: -70,
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        padding: 3,
+        borderColor: '#ffffff',
+        borderWidth: 2,
+        alignItems: 'center',
+        justifyContent: "center"
     },
     postImgText: {
         alignItems: "flex-start",
