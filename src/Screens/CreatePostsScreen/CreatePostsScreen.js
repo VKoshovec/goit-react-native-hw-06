@@ -58,7 +58,7 @@ const  CreatePost =({navigation})=> {
 
     const hendleCreate = () => {
         if (!title || !location || !photoi) { alert("Enter all data pleace!!!"); return }
-        navigation.navigate('PostsScreen', { photoi, location, inputRegion, title });     
+        navigation.navigate('PostList', { photoi, location, inputRegion, title });     
     }
 
     return (

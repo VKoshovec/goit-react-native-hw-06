@@ -1,34 +1,19 @@
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import { useState, useEffect } from "react";
 import React from "react";
-import Post from "../../Elements/Post";
-import ProfileElement from "../../Elements/ProfileElement";
-const postImg = require('../../Source/Rectangle23.png');
-const avatar = require('../../Source/Rectangle22.png');
-import data from '../../Source/posts'
-import { nanoid } from 'nanoid' 
+import { createStackNavigator } from "@react-navigation/stack";
+import PostList from "../../NestedScreens/PostList/PostList";
+import Comments from "../../NestedScreens/Comments/Comments";
+import Map from "../../NestedScreens/Map/Map";
 
-function PostsScreen({navigation , route}) {
+const PostNavigation = createStackNavigator();
 
-    const [posts, setPosts] = useState([]);
+const NavigationPosts = () => {
+  return(
+    <PostNavigation.Navigator initialRouteName='PostList' screenOptions={{headerShown: false}}>
+      <PostNavigation.Screen name='PostList' component = { PostList } />
+      <PostNavigation.Screen name='Comments' component = { Comments } />
+      <PostNavigation.Screen name='Map' component={ Map }></PostNavigation.Screen>
+    </PostNavigation.Navigator>
+  )
+}
 
-    useEffect(() => {
-      if (route.params) {
-        setPosts((prevState) => [...prevState, route.params]);
-      }
-    }, [route.params]);
-  
-    console.log(posts);
-    return (
-      <SafeAreaView style={{ justifyContent: "flex-start", alignItems: "center", overflow: "visible" }}>
-        <ScrollView>
-          <ProfileElement avatar= { avatar } name="Natali Romanova" email="email@example.com" />
-          { posts.map (el => 
-            <Post key={ el.title } img = { { uri: el.photoi } } text={ el.title } msgs = { 0 } location={ el.inputRegion } gps = { el.location }/>      
-          )}
-        </ScrollView>
-      </SafeAreaView>
-    );
-  };
-
-  export default PostsScreen;
+export default NavigationPosts;
