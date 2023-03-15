@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image} from "react-native";
 import React from "react";
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect} from "react";
 import { EvilIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Camera } from "expo-camera";
@@ -25,19 +25,22 @@ const  CreatePost =({navigation})=> {
 
     useEffect(() => {
         (async () => {
+
           let { status } = await Location.requestForegroundPermissionsAsync();
           if (status !== "granted") {
             console.log("Permission to access location was denied");
           }   
-          let locationPos = await Location.getCurrentPositionAsync({});
-          const coords = {
-            latitude: locationPos.coords.latitude,
-            longitude: locationPos.coords.longitude,
-          };
-          setLocation(coords);
 
-          let regionName = coords && await Location.reverseGeocodeAsync(coords);
-          setRegion(regionName);
+          Location.getCurrentPositionAsync({}).then((locationPos) =>{
+            const coords = {
+              latitude: locationPos.coords.latitude,
+              longitude: locationPos.coords.longitude,
+            };
+            setLocation(coords);
+            return coords;
+          }).then((coords)=>{
+            return Location.reverseGeocodeAsync(coords)
+          }).then((regionName)=> setRegion(regionName)).catch();
 
         })();
       }, []);
@@ -66,7 +69,7 @@ const  CreatePost =({navigation})=> {
      <Camera style={ styles.postImg } ref={setCamera}>
         <Image
               source={{ uri: photoi }}
-              style={{ height: 250, width: 250, justifyContent: 'flex-start', alignItems: 'flex-start' }}
+              style={{ height: 220, width: 220, marginTop: -80 }}
          />
      </Camera>
 
@@ -94,7 +97,8 @@ const CreatePostsScreen = ({navigation}) => {
             <BottomTabs.Screen 
                    options={{
                    tabBarIcon: () =>{
-                   return <TouchableOpacity style={ styles.trashButton } activeOpacity={0.5} >
+                   return <TouchableOpacity style={ styles.trashButton } activeOpacity={0.5} 
+                   onPress={()=>navigation.navigate('Home', { screen: 'PostsScreen' })}>
                       <EvilIcons name="trash" size={24} color="black" />
                     </TouchableOpacity>
                    },
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     postImg: {
-        flex: 2,
+        flex: 3,
         width: '100%',
         height: 600,
         color: '#F6F6F6',

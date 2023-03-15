@@ -1,8 +1,8 @@
 import { Text } from "react-native"
 
-const Comments = () => {
+const Comments = ({navigation}) => {
     return(
-        <Text>Comments here will be soon...</Text>
+        <Text>Comments will be here soon...</Text>
     )
 };
 

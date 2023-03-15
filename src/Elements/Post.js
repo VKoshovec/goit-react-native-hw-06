@@ -1,28 +1,25 @@
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import React from "react";
-import { Feather } from '@expo/vector-icons'; 
-import { EvilIcons } from '@expo/vector-icons';
+import { Feather, EvilIcons } from '@expo/vector-icons'; 
 
-const Post = ({ navigation, img, text, msgs, location, gps }) =>{
+
+const Post = ({ img, text, msgs, location, gps }) =>{
 
      const [gpsLocation, setGpsLocation] = useState({});  
 
      useEffect (()=>{
       setGpsLocation(gps);
-     }, [])
+     }, []);
 
      const clickComment = () => {
        navigation.navigate('Comments');
-     }
+     };
 
      const clickMap = () => {
        navigation.navigate('Map', { location });
-    }
+    };
      
-
-
-     console.log(gpsLocation);
 
     return (
         <View style={ styles.container }>
@@ -30,7 +27,7 @@ const Post = ({ navigation, img, text, msgs, location, gps }) =>{
           <Text style={ styles.posText } >{text}</Text>
           <View style={ styles.infoContainer }>
 
-            <TouchableOpacity style={ styles.info } onPress={ clickComment }>
+            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("Map", { location }) }>
               <Feather name="message-circle" size={18} color="gray" />
               <Text>{ msgs }</Text>
             </TouchableOpacity>
