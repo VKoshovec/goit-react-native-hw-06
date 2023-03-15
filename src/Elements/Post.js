@@ -1,9 +1,20 @@
 import { View, StyleSheet, ImageBackground, Text } from "react-native";
+import { useState, useEffect } from "react";
 import React from "react";
 import { Feather } from '@expo/vector-icons'; 
 import { EvilIcons } from '@expo/vector-icons';
 
-const Post = ({ img, text, msgs, location }) =>{
+const Post = ({ img, text, msgs, location, gps }) =>{
+
+     const [gpsLocation, setGpsLocation] = useState({});  
+
+     useEffect (()=>{
+      setGpsLocation(gps);
+     }, [])
+
+
+     console.log(gpsLocation);
+
     return (
         <View style={ styles.container }>
           <ImageBackground source={ img } style={ styles.postImg }></ImageBackground>
