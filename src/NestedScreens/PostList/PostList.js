@@ -1,8 +1,7 @@
-// import Post from "../../Elements/Post";
 import React from "react";
 import ProfileElement from "../../Elements/ProfileElement";
 const avatar = require('../../Source/Rectangle22.png');
-import { Text, FlatList, View, Button, Image, TouchableOpacity,  StyleSheet } from "react-native";
+import { Text, FlatList, View, Image, TouchableOpacity,  StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { Feather, EvilIcons } from '@expo/vector-icons'; 
 

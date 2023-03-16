@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
+import {Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { AntDesign, SimpleLineIcons, Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
+import PostsNav from "../Navigation/PostsNav";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 
@@ -34,14 +34,14 @@ const Home = ({ navigation }) => {
                 {/* ADD BUTTON */}
                 <BottomTabs.Screen  options={{
                    tabBarIcon: () => {
-                   return <TouchableOpacity style={ styles.addButton } activeOpacity={0.5} onPress={()=>navigation.navigate('CreatePostsScreen')}>
+                   return <TouchableOpacity style={ styles.addButton } activeOpacity={0.5} onPress={()=>navigation.navigate('PostsNav')}>
                     <Text style={ styles.addButtonText }>+</Text>
                     </TouchableOpacity>
                    },
                    headerShown: false,
                    tabBarStyle: { display: "none" },
                    headerTitleAlign: "center",
-                }} name='CreatePostsScreen' component={CreatePostsScreen}/>
+                }} name='PostsNav' component={PostsNav}/>
              
                 {/* PROFILE BUTTON */}
                 <BottomTabs.Screen options={{
