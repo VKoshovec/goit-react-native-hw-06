@@ -4,9 +4,21 @@ import { StyleSheet, Text, ImageBackground,
 import React, { useState } from "react";
 import { StatusBar  } from 'expo-status-bar';
 const backImage = require('../../Source/Photo_BG.png');
+import { useSelector } from "react-redux";
+import { selectIsAuth } from "../../Redux/auth/authSelectors";
+import { useDispatch } from "react-redux";
+import  actions  from '../../Redux/auth/authSlice';
 
 
 const LoginScreen = ({ navigation }) => {
+  
+   //redux  
+   const isAuth = useSelector(selectIsAuth);
+   console.log(isAuth);
+   
+  //  const dispatch = useDispatch();
+   
+   //redux//
 
    const [mail, setMail] =useState('');
    const [password, setPassword] =useState('');
@@ -17,6 +29,7 @@ const LoginScreen = ({ navigation }) => {
    const register =()=> {
     if (!mail || !password) { alert("Enter all data pleace!!!"); return }
     navigation.navigate('Home', { screen: 'PostsScreen' });
+    // dispatch(actions)
    }
 
    const passwShow =()=> alert(`Your password is: ${password}`);
