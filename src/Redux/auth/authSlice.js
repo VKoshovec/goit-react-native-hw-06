@@ -28,4 +28,4 @@ const authSlise = createSlice({
 });
 
 // export default authSlise.reducer;
-export default { reducer, actions } = authSlise;
+export default authSlise;
