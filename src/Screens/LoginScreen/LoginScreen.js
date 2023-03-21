@@ -1,38 +1,40 @@
 import { StyleSheet, Text, ImageBackground,
    View, TouchableOpacity, TextInput, KeyboardAvoidingView, 
    Platform } from "react-native";
-import React, { useState } from "react";
+import React, { useState,  useEffect } from "react";
 import { StatusBar  } from 'expo-status-bar';
 const backImage = require('../../Source/Photo_BG.png');
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../Redux/auth/authSelectors";
 import { useDispatch } from "react-redux";
-import  actions  from '../../Redux/auth/authSlice';
+import { authLogin, authLogout } from "../../Redux/auth/authActions";
+
+
 
 
 const LoginScreen = ({ navigation }) => {
-  
-   //redux  
-   const isAuth = useSelector(selectIsAuth);
-   console.log(isAuth);
-   
-  //  const dispatch = useDispatch();
-   
-   //redux//
 
-   const [mail, setMail] =useState('');
-   const [password, setPassword] =useState('');
+  //state
+  const [mail, setMail] =useState('');
+  const [password, setPassword] =useState('');
+  const au = useSelector(selectIsAuth);
+
+  //redux   
+  const dispatch = useDispatch();
+  //redux//
 
    const handleMail =(text)=>{ setMail(text)};
    const handlePassword =(text)=>{ setPassword(text)};
+   
 
-   const register =()=> {
+  const register =()=> {
     if (!mail || !password) { alert("Enter all data pleace!!!"); return }
     navigation.navigate('Home', { screen: 'PostsScreen' });
-    // dispatch(actions)
-   }
+    dispatch(authLogin());
+    console.log(au);
+  }
 
-   const passwShow =()=> alert(`Your password is: ${password}`);
+  const passwShow =()=> alert(`Your password is: ${password}`);
 
    return (
     

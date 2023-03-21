@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { authLogin, authLogout } from "./authActions";
 
 
 const authInit = {
@@ -14,12 +15,12 @@ const authSlise = createSlice({
     initialState: authInit,
     extraReducers: builder => {
         builder
-        .addCase('auth\login', (store) => {
+        .addCase(authLogin.type, (store) => {
             store.error = null;
             store.loading = true;
             store.isAuth = true;
         })
-        .addCase('auth\logout', (store) => {
+        .addCase(authLogout.type, (store) => {
             store.error = null;
             store.loading = true;
             store.isAuth = false;
