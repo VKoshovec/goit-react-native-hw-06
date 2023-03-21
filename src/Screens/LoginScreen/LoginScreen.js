@@ -7,7 +7,7 @@ const backImage = require('../../Source/Photo_BG.png');
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../Redux/auth/authSelectors";
 import { useDispatch } from "react-redux";
-import { authLogin, authLogout } from "../../Redux/auth/authActions";
+import { fetchLoginUser } from "../../Redux/auth/authOperations";
 
 
 
@@ -17,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
   //state
   const [mail, setMail] =useState('');
   const [password, setPassword] =useState('');
-  const au = useSelector(selectIsAuth);
+
 
   //redux   
   const dispatch = useDispatch();
@@ -30,14 +30,15 @@ const LoginScreen = ({ navigation }) => {
   const register =()=> {
     if (!mail || !password) { alert("Enter all data pleace!!!"); return }
     navigation.navigate('Home', { screen: 'PostsScreen' });
-    dispatch(authLogin());
-    console.log(au);
+    dispatch(fetchLoginUser({ mail, password }));
   }
+
+  console.log(useSelector(selectIsAuth));
 
   const passwShow =()=> alert(`Your password is: ${password}`);
 
    return (
-    
+
       <View style={styles.maincontainer}>
         <ImageBackground source={backImage} style={styles.backImg}>
           <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >

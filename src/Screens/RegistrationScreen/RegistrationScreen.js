@@ -4,10 +4,15 @@ import { StyleSheet, Text, ImageBackground,
 import React, { useState } from "react";
 import { StatusBar  } from 'expo-status-bar';
 const backImage = require('../../Source/Photo_BG.png');
+import { useDispatch } from "react-redux";
+import { fetchRegisterUser } from "../../Redux/auth/authOperations";
+
 
 const buttonImg = require('./add.png');
 
 const RegistrationScreen = ({ navigation }) => {
+
+   const dispatch = useDispatch();
 
    const [login, setLogin] =useState('');
    const [mail, setMail] =useState('');
@@ -19,7 +24,8 @@ const RegistrationScreen = ({ navigation }) => {
 
    const register =()=> {
     if (!login || !mail || !password) { alert("Enter all data pleace!!!"); return }
-    navigation.navigate('Home', { screen: 'PostsScreen' });
+    // navigation.navigate('Home', { screen: 'PostsScreen' });
+    dispatch(fetchRegisterUser({ mail, password }));
    }
 
    const passwShow =()=> alert(`Your password is: ${password}`);

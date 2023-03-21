@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authLogin, authLogout } from "./authActions";
+import { authLogin, authLogout, fetchRegisterUser, fetchLoginUser } from "./authOperations";
 
 
 const authInit = {
     user: '',
     email: '',
+    idToken: '',
     isAuth: false,
     error: null,
     loading: false,
@@ -24,6 +25,22 @@ const authSlise = createSlice({
             store.error = null;
             store.loading = true;
             store.isAuth = false;
+        })
+        .addCase(fetchRegisterUser.fulfilled, (store, { payload }) => {
+            const {idToken, email} = payload;
+            store.user = email;
+            store.idToken = idToken;
+            store.error = null;
+            store.loading = true;
+            store.isAuth = true;
+        })
+        .addCase(fetchLoginUser.fulfilled, (store, { payload }) => {
+            const {idToken, email} = payload;
+            store.user = email;
+            store.idToken = idToken;
+            store.error = null;
+            store.loading = true;
+            store.isAuth = true;
         })
     }
 });
