@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authLogin, authLogout, fetchRegisterUser, fetchLoginUser } from "./authOperations";
+import { fetchRegisterUser, fetchLoginUser } from "./authOperations";
 
 
 const authInit = {
@@ -16,23 +16,26 @@ const authSlise = createSlice({
     initialState: authInit,
     extraReducers: builder => {
         builder
-        .addCase(authLogin.type, (store) => {
+        .addCase(fetchRegisterUser.pending, (store) => {
             store.error = null;
             store.loading = true;
-            store.isAuth = true;
-        })
-        .addCase(authLogout.type, (store) => {
-            store.error = null;
-            store.loading = true;
-            store.isAuth = false;
         })
         .addCase(fetchRegisterUser.fulfilled, (store, { payload }) => {
             const {idToken, email} = payload;
             store.user = email;
             store.idToken = idToken;
             store.error = null;
-            store.loading = true;
+            store.loading = false;
             store.isAuth = true;
+        })
+        .addCase(fetchRegisterUser.rejected, (store, { payload }) => {
+            store.error = payload;
+            store.loading = false;
+            store.isAuth = false;
+        })
+        .addCase(fetchLoginUser.pending, (store) => {
+            store.error = null;
+            store.loading = true;
         })
         .addCase(fetchLoginUser.fulfilled, (store, { payload }) => {
             const {idToken, email} = payload;
@@ -41,6 +44,11 @@ const authSlise = createSlice({
             store.error = null;
             store.loading = true;
             store.isAuth = true;
+        })
+        .addCase(fetchLoginUser.rejected, (store, { payload }) => {
+            store.error = payload;
+            store.loading = false;
+            store.isAuth = false;
         })
     }
 });
