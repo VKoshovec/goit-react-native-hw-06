@@ -7,12 +7,9 @@ import store from './src/Redux/store';
 import LoadingScreen from './src/Elements/Loading';
 
 export default function App() { 
-  
-  // const isLoading = useSelector(selectIsLoading);
-  // isLoading ? Loading.circle(): Loading.remove()
 
   return (
-  <Provider store={ store } >
+  <Provider store= { store } >
     <>
     <LoadingScreen/>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

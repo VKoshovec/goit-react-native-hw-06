@@ -24,8 +24,11 @@ const RegistrationScreen = ({ navigation }) => {
 
    const register =()=> {
     if (!login || !mail || !password) { alert("Enter all data pleace!!!"); return }
-    // navigation.navigate('Home', { screen: 'PostsScreen' });
-    dispatch(fetchRegisterUser({ mail, password }));
+    dispatch(fetchRegisterUser({ mail, password }))
+    .then(result => {
+      result.type ==='auth/fetchRegisterUser/fulfilled' && navigation.navigate('Home', { screen: 'PostsScreen' })
+      result.type !=='auth/fetchRegisterUser/fulfilled' && alert('Incorrect registration!!!')
+    });;
    }
 
    const passwShow =()=> alert(`Your password is: ${password}`);

@@ -42,7 +42,7 @@ const authSlise = createSlice({
             store.user = email;
             store.idToken = idToken;
             store.error = null;
-            store.loading = true;
+            store.loading = false;
             store.isAuth = true;
         })
         .addCase(fetchLoginUser.rejected, (store, { payload }) => {
