@@ -25,4 +25,14 @@ export const fetchLoginUser = createAsyncThunk('auth/fetchLoginUser', async(data
     } catch (error) {
         return thunkAPI.rejectWithValue(e.message);
     }
-})
+});
+
+export const fetchCurrentUser = createAsyncThunk('auth/fetchCurrentUser', async(data, thunkAPI) => {
+    try {
+        const{ mail } = data;
+        const result = auth.currentUser;
+        return result;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(e.message);
+    }
+});

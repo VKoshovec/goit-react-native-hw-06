@@ -1,24 +1,30 @@
 import { StyleSheet, Text, ImageBackground,
    View, TouchableOpacity, TextInput, KeyboardAvoidingView, 
    Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar  } from 'expo-status-bar';
 const backImage = require('../../Source/Photo_BG.png');
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../Redux/auth/authSelectors";
 import { useDispatch } from "react-redux";
-import { fetchLoginUser } from "../../Redux/auth/authOperations";
+import { fetchLoginUser, fetchCurrentUser } from "../../Redux/auth/authOperations";
 
 const LoginScreen = ({ navigation }) => {
 
   //state
   const [mail, setMail] =useState('');
-  const [password, setPassword] =useState('');
-  
+  const [password, setPassword] =useState('');  
   const isAuth = useSelector(selectIsAuth);
 
   //redux   
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchCurrentUser)
+    isAuth && console.log(true);
+  },[dispatch]);
+
+  
   //redux//
 
    const handleMail =(text)=>{ setMail(text)};
