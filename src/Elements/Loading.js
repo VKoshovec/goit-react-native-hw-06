@@ -1,7 +1,7 @@
 import Spinner from 'react-native-loading-spinner-overlay';
 import { View, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
-import { selectIsLoading, selectStore } from '../Redux/auth/authSelectors';
+import { selectIsLoading } from '../Redux/auth/authSelectors';
 
 
 const LoadingScreen = () => {

@@ -14,17 +14,15 @@ const LoginScreen = ({ navigation }) => {
   //state
   const [mail, setMail] =useState('');
   const [password, setPassword] =useState('');  
-  const isAuth = useSelector(selectIsAuth);
 
   //redux   
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(fetchCurrentUser)
-    isAuth && console.log(true);
+    dispatch(fetchCurrentUser());
   },[dispatch]);
 
-  
+  useSelector(selectIsAuth) && navigation.navigate('Home', { screen: 'PostsScreen' });
   //redux//
 
    const handleMail =(text)=>{ setMail(text)};

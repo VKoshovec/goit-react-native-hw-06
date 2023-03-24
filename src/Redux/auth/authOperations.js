@@ -27,10 +27,19 @@ export const fetchLoginUser = createAsyncThunk('auth/fetchLoginUser', async(data
     }
 });
 
-export const fetchCurrentUser = createAsyncThunk('auth/fetchCurrentUser', async(data, thunkAPI) => {
+export const fetchCurrentUser = createAsyncThunk('auth/fetchCurrentUser', async(_, thunkAPI) => {
     try {
-        const{ mail } = data;
-        const result = auth.currentUser;
+        const result = await auth.currentUser;
+        console.log(result)
+        return result;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(e.message);
+    }
+});
+
+export const fetchLogOutUser = createAsyncThunk('auth/fetchLogOutUser', async(_, thunkAPI) => {
+    try {
+        const result = await auth.signOut();
         return result;
     } catch (error) {
         return thunkAPI.rejectWithValue(e.message);

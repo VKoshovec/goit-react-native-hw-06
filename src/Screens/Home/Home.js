@@ -5,11 +5,24 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PostsNav from "../Navigation/PostsNav";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
+import { useDispatch } from "react-redux";
+import { fetchLogOutUser } from "../../Redux/auth/authOperations";
 
 
 const BottomTabs = createBottomTabNavigator(); 
 
 const Home = ({ navigation }) => {
+    
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(fetchLogOutUser())
+    .then(result => {
+      result.type ==='auth/fetchLogOutUser/fulfilled' && navigation.navigate('Login')
+      result.type !=='auth/fetchLogOutUser/fulfilled' && alert('Incorrect logOut!!!')
+    });
+  }
+
     return (
         <BottomTabs.Navigator initialRouteName="Posts" 
         screenOptions={{
@@ -26,7 +39,7 @@ const Home = ({ navigation }) => {
                    headerTitleAlign:"center",
                    headerRightContainerStyle: { paddingRight: 20 },
                    headerRight: () => (
-                    <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5} onPress={()=>navigation.navigate('Login')} >
+                    <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5} onPress={ handleLogOut } >
                        <Feather name="log-out" size={24} color="gray" />
                     </TouchableOpacity>)
                 }} name='PostsScreen' component={PostsScreen}/>
