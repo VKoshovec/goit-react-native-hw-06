@@ -1,6 +1,6 @@
 import { StyleSheet, Text, ImageBackground,
    View, TouchableOpacity, TextInput, KeyboardAvoidingView, 
-   Platform } from "react-native";
+   Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
 import React, { useState } from "react";
 import { StatusBar  } from 'expo-status-bar';
 const backImage = require('../../Source/Photo_BG.png');
@@ -34,10 +34,11 @@ const RegistrationScreen = ({ navigation }) => {
    const passwShow =()=> alert(`Your password is: ${password}`);
 
    return (
+   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.maincontainer}>
-    <ImageBackground source={backImage} style={styles.backImg}>
-    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >
-      <View style={ styles.container }>
+     <ImageBackground source={backImage} style={styles.backImg}>
+      <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >
+       <View style={ styles.container }>
         <View style={ styles.pfotoContainer }>
            <TouchableOpacity style={ styles.addbutton } activeOpacity={0.5}>
               <ImageBackground source={buttonImg} style={{width: '100%', height: '100%'}}></ImageBackground>
@@ -65,7 +66,8 @@ const RegistrationScreen = ({ navigation }) => {
      </KeyboardAvoidingView> 
      </ImageBackground>
   <StatusBar style="auto" />  
-</View>
+ </View>
+</TouchableWithoutFeedback>
    )
 };
 
