@@ -6,6 +6,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
 
+import { useDispatch } from "react-redux";
+import { fetchUploadPhoto } from "../../Redux/storage/storageOperations";
+import { fetchAddPost } from "../../Redux/posts/postsOperations";
+
 
 const trashImg = require('./trash.png');
 
@@ -17,6 +21,8 @@ const  CreatePost =({navigation})=> {
     const [region, setRegion] = useState(null);
     const [inputRegion, setInputRegion] = useState('')
     const [title, setTitle] = useState('');
+
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -57,6 +63,8 @@ const  CreatePost =({navigation})=> {
 
     const hendleCreate = () => {
         if (!title || !location || !photoi) { alert("Enter all data pleace!!!"); return }
+        dispatch(fetchUploadPhoto(photoi));
+        dispatch(fetchAddPost({ photo: photoi, title, location }));
         navigation.navigate('PostList', { photoi, location, inputRegion, title });     
     }
 

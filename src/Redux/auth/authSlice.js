@@ -90,5 +90,4 @@ const authSlise = createSlice({
     }
 });
 
-// export default authSlise.reducer;
 export default authSlise;
