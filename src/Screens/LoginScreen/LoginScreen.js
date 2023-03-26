@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../Redux/auth/authSelectors";
 import { useDispatch } from "react-redux";
 import { fetchLoginUser, fetchCurrentUser } from "../../Redux/auth/authOperations";
+import { fetchGetAllPosts } from "../../Redux/posts/postsOperations";
+
 
 const LoginScreen = ({ navigation }) => {
 
@@ -15,11 +17,13 @@ const LoginScreen = ({ navigation }) => {
   const [mail, setMail] =useState('');
   const [password, setPassword] =useState('');  
 
-  //redux   
+  //redux  
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(fetchCurrentUser());
+    dispatch(fetchCurrentUser()).then(result => {
+      result.type === "auth/fetchCurrentUser/fulfilled" && dispatch(fetchGetAllPosts());
+    });
   },[dispatch]);
 
   useSelector(selectIsAuth) && navigation.navigate('Home', { screen: 'PostsScreen' });

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { db } from "../../Api/firebase";
 
 const storage = getStorage();
 
@@ -9,8 +10,11 @@ export const fetchUploadPhoto = createAsyncThunk('storage/fetchUploadPhoto', asy
     const file = await responce.blob();
     const uid = Date.now().toString();
     const storageRef = ref(storage, uid);
-    const result = await uploadBytes(storageRef, file);
-    console.log(result);
+    await uploadBytes(storageRef, file);
+
+    const storeLink = await getDownloadURL(ref(storageRef));
+
+    return storeLink;
 
   } catch (error) {
     return thunkAPI.rejectWithValue(e.message);

@@ -9,10 +9,17 @@ const profilePhoto = require('../../Source/Rectangle22.png');
 const postImg = require('../../Source/Rectangle23.png');
 import data from '../../Source/posts'
 import Post from "../../Elements/Post";
+import { useSelector } from "react-redux";
+import { selectAllPosts } from "../../Redux/posts/postsSelectors";
 
 const BottomTabsProf = createBottomTabNavigator(); 
 
+
 function ProfileScreen({navigation}) {
+   
+    const posts = useSelector(selectAllPosts);
+    console.log(posts)
+
     return (
     <SafeAreaView>
       <ScrollView>
@@ -29,8 +36,8 @@ function ProfileScreen({navigation}) {
                    <Feather name="log-out" size={24} color="gray" />
                  </TouchableOpacity>
                <Text style={ styles.title }>Natali Romanova</Text>      
-            { data.map (el => 
-            <Post key={ el.id } img = { postImg } text={ el.name } msgs = { 0 } location={ el.location }/>      
+            { posts.map (el => 
+            <Post key={ el.id } img = { el.photo } text={ el.title } msgs = { 0 } location={ 'el.location' }/>      
             )}
             </View>  
         </View>
