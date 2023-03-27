@@ -37,7 +37,7 @@ function ProfileScreen({navigation}) {
                  </TouchableOpacity>
                <Text style={ styles.title }>Natali Romanova</Text>      
             { posts.map (el => 
-            <Post key={ el.id } img = { el.photo } text={ el.title } msgs = { 0 } location={ 'el.location' }/>      
+            <Post key={ el['id'] } img = { el['photo'] } text={ el['title'] } msgs = { 0 } location={ 'el.location' }/>      
             )}
             </View>  
         </View>

@@ -7,21 +7,21 @@ export const fetchAddPost = createAsyncThunk('posts/fetchAddPost', async(data, t
         const docRef = await addDoc(collection(db, 'posts'), {
             ...data
          });
-         console.log(docRef);
          return docRef;    
     } catch (error) {
         console.log(error);
     }
     
-}) 
+}); 
 
 export const fetchGetAllPosts = createAsyncThunk('posts/fetchGetAllPosts', async(_, thunkAPI) => {
     try {
-        const result = await getDocs(collection(db, 'posts'));
-        result.forEach((doc) => {
-            console.log(JSON.parse(doc.data()));
+        const Docs = await getDocs(collection(db, 'posts'));
+        const result = [];
+        Docs.forEach((doc) => {
+           result.push({ id: doc.id , ...doc.data()});
         });
-        return;
+        return result;
     } catch (error) {
         console.log(error);
     }

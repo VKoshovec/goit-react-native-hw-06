@@ -40,7 +40,7 @@ const postsSlise = createSlice({
             // store.photo = photo;
             // store.title = title;
             // store.location = location;
-            store.posts = [...payload]
+            store.posts = payload;
             store.error = null;
             store.loading = false;
         })
