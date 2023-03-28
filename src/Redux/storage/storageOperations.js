@@ -13,13 +13,13 @@ export const fetchUploadPhoto = createAsyncThunk('storage/fetchUploadPhoto', asy
     await uploadBytes(storageRef, file);
 
     const storeLink = await getDownloadURL(ref(storageRef));
-
+    
     return storeLink;
 
   } catch (error) {
     return thunkAPI.rejectWithValue(e.message);
   }
-})
+});
 
 export const fetchDeldPhoto = createAsyncThunk('storage/fetchDeldPhoto', async(data, thunkAPI) => {
     try {
@@ -29,4 +29,4 @@ export const fetchDeldPhoto = createAsyncThunk('storage/fetchDeldPhoto', async(d
     } catch (error) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  })
+  });

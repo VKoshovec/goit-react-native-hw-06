@@ -21,11 +21,12 @@ const Post = ({ img, text, msgs, location, gps }) =>{
     };
      
 
-    console.log(`uri:'${ img }'`);
+    console.log(`{ uri: '${ img }' } `);
+    console.dir({ uri: 'https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1679864578858?alt=media&token=2bbdde72-6e65-43de-8100-63b6790e8b6d' });
 
     return (
         <View style={ styles.container }>
-          <ImageBackground source={ `uri:'${ img }'` } resizeMode="cover" style={ styles.postImg }></ImageBackground>
+          <ImageBackground source={{ uri: `${ img }`}} style={ styles.postImg }></ImageBackground>
           <Text style={ styles.posText } >{text}</Text>
           <View style={ styles.infoContainer }>
 

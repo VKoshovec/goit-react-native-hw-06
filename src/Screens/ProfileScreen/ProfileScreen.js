@@ -7,7 +7,6 @@ const buttonImg = require('../RegistrationScreen/add.png');
 const profilePhoto = require('../../Source/Rectangle22.png');
 
 const postImg = require('../../Source/Rectangle23.png');
-import data from '../../Source/posts'
 import Post from "../../Elements/Post";
 import { useSelector } from "react-redux";
 import { selectAllPosts } from "../../Redux/posts/postsSelectors";
