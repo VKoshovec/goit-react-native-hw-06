@@ -21,12 +21,16 @@ const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(fetchCurrentUser()).then(result => {
-      result.type === "auth/fetchCurrentUser/fulfilled" && dispatch(fetchGetAllPosts());
-    });
+    dispatch(fetchCurrentUser());
   },[dispatch]);
 
-  useSelector(selectIsAuth) && navigation.navigate('Home', { screen: 'PostsScreen' });
+  // useEffect(()=>{
+  //   dispatch(fetchCurrentUser()).then(result => {
+  //     result.type === "auth/fetchCurrentUser/fulfilled" && dispatch(fetchGetAllPosts());
+  //   });
+  // },[dispatch]);
+
+  // useSelector(selectIsAuth) && navigation.navigate('Home', { screen: 'PostsScreen' });
   //redux//
 
    const handleMail =(text)=>{ setMail(text)};

@@ -7,7 +7,6 @@ const auth = getAuth(app);
 export const fetchRegisterUser = createAsyncThunk('auth/fetchRegisterUser', async(data, thunkAPI) =>{
  
     try {
-
         const{ mail, password } = data;
         const result = await createUserWithEmailAndPassword( auth, mail, password);
         return result._tokenResponse;
