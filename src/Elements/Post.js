@@ -19,10 +19,6 @@ const Post = ({ img, text, msgs, location, gps }) =>{
      const clickMap = () => {
        navigation.navigate('Map', { location });
     };
-     
-
-    console.log(`{ uri: '${ img }' } `);
-    console.dir({ uri: 'https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1679864578858?alt=media&token=2bbdde72-6e65-43de-8100-63b6790e8b6d' });
 
     return (
         <View style={ styles.container }>
@@ -35,12 +31,19 @@ const Post = ({ img, text, msgs, location, gps }) =>{
               <Text>{ msgs }</Text>
             </TouchableOpacity>
 
+            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("Comments") }>
+              <Feather name="message-circle" size={18} color="gray" />
+              <Text>0</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity style={ styles.info } onPress={ clickMap } >
               <EvilIcons name="location" size={24} color="gray" />
               <Text style={ styles.infolink }>{ location }</Text>
             </TouchableOpacity>
           </View>
         </View>
+
+        
     );
 };
 

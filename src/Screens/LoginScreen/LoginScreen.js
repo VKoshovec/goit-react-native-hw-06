@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { StatusBar  } from 'expo-status-bar';
 const backImage = require('../../Source/Photo_BG.png');
 import { useSelector } from "react-redux";
-import { selectIsAuth } from "../../Redux/auth/authSelectors";
+import { selectIsAuth, selectUser } from "../../Redux/auth/authSelectors";
 import { useDispatch } from "react-redux";
 import { fetchLoginUser, fetchCurrentUser } from "../../Redux/auth/authOperations";
 import { fetchGetAllPosts } from "../../Redux/posts/postsOperations";
@@ -20,9 +20,10 @@ const LoginScreen = ({ navigation }) => {
   //redux  
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(fetchCurrentUser());
-  },[dispatch]);
+  // useEffect(()=>{
+  //   dispatch(fetchCurrentUser());
+  // },[dispatch]);
+
 
   // useEffect(()=>{
   //   dispatch(fetchCurrentUser()).then(result => {

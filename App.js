@@ -5,6 +5,7 @@ import Navigation from './src/Screens/Navigation/Navigation';
 import { Provider } from 'react-redux';
 import store from './src/Redux/store';
 import LoadingScreen from './src/Elements/Loading';
+import AuthChack from './src/Elements/AuthChack';
 
 export default function App() { 
 
@@ -12,11 +13,13 @@ export default function App() {
   <Provider store= { store } >
     <>
     <LoadingScreen/>
+    <AuthChack>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <NavigationContainer>
          <Navigation/>         
       </NavigationContainer>
      </TouchableWithoutFeedback>
+     </AuthChack>
      </>
    </Provider>
   );

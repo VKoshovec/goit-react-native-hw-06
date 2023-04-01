@@ -5,8 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PostsNav from "../Navigation/PostsNav";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
-import { useDispatch } from "react-redux";
-import { fetchLogOutUser } from "../../Redux/auth/authOperations";
+import { useDispatch} from "react-redux";
+import { useEffect } from "react";
+import { fetchLogOutUser, } from "../../Redux/auth/authOperations";
+import { fetchGetAllPosts } from "../../Redux/posts/postsOperations";
 
 
 const BottomTabs = createBottomTabNavigator(); 
@@ -21,7 +23,11 @@ const Home = ({ navigation }) => {
       result.type ==='auth/fetchLogOutUser/fulfilled' && navigation.navigate('Login')
       result.type !=='auth/fetchLogOutUser/fulfilled' && alert('Incorrect logOut!!!')
     });
-  }
+  };
+
+  useEffect(()=> {
+    dispatch(fetchGetAllPosts())
+  },[dispatch]);
 
     return (
         <BottomTabs.Navigator initialRouteName="Posts" 

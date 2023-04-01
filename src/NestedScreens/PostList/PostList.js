@@ -1,24 +1,18 @@
 import React from "react";
 import ProfileElement from "../../Elements/ProfileElement";
-const avatar = require('../../Source/Rectangle22.png');
 import { Text, FlatList, View, Image, TouchableOpacity,  StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
 import { Feather, EvilIcons } from '@expo/vector-icons'; 
+import { useSelector } from "react-redux";
+import { selectAllPosts } from "../../Redux/posts/postsSelectors";
 
-const PostList = ({navigation , route}) => {
-    const [posts, setPosts] = useState([]);
+const PostList = ({navigation}) => {
 
-    useEffect(() => {
-      if (route.params) {
-        setPosts((prevState) => [...prevState, route.params]);
-      }
-    }, [route.params]);
-  
+    const posts = useSelector(selectAllPosts);
+
     return (<>
- 
       <View style={ { flex: 1,
       justifyContent: "center" } }>
-      <ProfileElement avatar= { avatar } name="Natali Romanova" email="email@example.com" />
+        <ProfileElement />
         <FlatList 
         data= { posts }
         keyExtractor={(item, indx) => indx.toString()}
@@ -31,7 +25,7 @@ const PostList = ({navigation , route}) => {
             }}
           >
             <Image
-              source={{ uri: item.photoi }}
+              source={{ uri: `${ item.photo }`}} 
               style={{ width: 380, height: 280, borderRadius: 15 }}
             />
             <Text style={ styles.posText }>{ item.title }</Text>
@@ -41,6 +35,7 @@ const PostList = ({navigation , route}) => {
               <Feather name="message-circle" size={18} color="gray" />
               <Text>0</Text>
             </TouchableOpacity>
+
             <TouchableOpacity style={ styles.info } onPress={ ()=> navigation.navigate("Map", { location: item.location }) }>
                <EvilIcons name="location" size={24} color="gray" />
                <Text style={ styles.infolink }>{item.inputRegion}</Text>
@@ -48,7 +43,7 @@ const PostList = ({navigation , route}) => {
              </View>
           </View>
           
-    )}
+        )}
         >
         </FlatList>
       </View >

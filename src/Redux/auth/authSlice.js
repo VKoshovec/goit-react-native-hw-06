@@ -3,9 +3,9 @@ import { fetchRegisterUser, fetchLoginUser, fetchCurrentUser, fetchLogOutUser } 
 
 
 const authInit = {
+    name: '',
     user: '',
-    email: '',
-    idToken: '',
+    uid: '',
     isAuth: false,
     error: null,
     loading: false,
@@ -21,9 +21,10 @@ const authSlise = createSlice({
             store.loading = true;
         })
         .addCase(fetchRegisterUser.fulfilled, (store, { payload }) => {
-            const {idToken, email} = payload;
+            const { uid, email, displayName } = payload;
+            store.name = displayName;
             store.user = email;
-            store.idToken = idToken;
+            store.uid = uid;
             store.error = null;
             store.loading = false;
             store.isAuth = true;
@@ -38,9 +39,10 @@ const authSlise = createSlice({
             store.loading = true;
         })
         .addCase(fetchLoginUser.fulfilled, (store, { payload }) => {
-            const {idToken, email} = payload;
+            const {  email, displayName, localId } = payload;
+            store.name = displayName;
             store.user = email;
-            store.idToken = idToken;
+            store.uid = localId;
             store.error = null;
             store.loading = false;
             store.isAuth = true;
@@ -60,11 +62,15 @@ const authSlise = createSlice({
                 store.error = null;
                 store.loading = false;
                 store.isAuth = false;
-            }
-                store.user = user;
+            } else {
+                store.user = user.email;
+                store.name = user.displayName;
+                store.uid = user.uid;
                 store.error = null;
                 store.loading = false;
                 store.isAuth = true;
+            }
+
         })
         .addCase(fetchCurrentUser.rejected, (store, { payload }) => {
             store.error = payload;
@@ -76,8 +82,9 @@ const authSlise = createSlice({
             store.loading = true;
         })
         .addCase(fetchLogOutUser.fulfilled, (store) => {
+            store.name = '',
             store.user = '';
-            store.idToken = '';
+            store.uid = '';
             store.error = null;
             store.loading = false;
             store.isAuth = false;

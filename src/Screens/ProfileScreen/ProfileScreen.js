@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, SafeAreaView, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, SafeAreaView, ScrollView, FlatList, Image } from "react-native";
+import { Feather, EvilIcons } from '@expo/vector-icons'; 
 import React from "react";
-import { Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const backImage = require('../../Source/Photo_BG.png');
 const buttonImg = require('../RegistrationScreen/add.png');
@@ -9,15 +9,19 @@ const profilePhoto = require('../../Source/Rectangle22.png');
 const postImg = require('../../Source/Rectangle23.png');
 import Post from "../../Elements/Post";
 import { useSelector } from "react-redux";
-import { selectAllPosts } from "../../Redux/posts/postsSelectors";
+import { selectAuthPosts } from "../../Redux/posts/postsSelectors";
+import { selectUser } from "../../Redux/auth/authSelectors";
+import PostList from "../../NestedScreens/PostList/PostList";
+import ProfileElement from "../../Elements/ProfileElement";
 
 const BottomTabsProf = createBottomTabNavigator(); 
 
 
 function ProfileScreen({navigation}) {
    
-    const posts = useSelector(selectAllPosts);
-    console.log(posts)
+    const posts = useSelector(selectAuthPosts);
+    const { name } = useSelector(selectUser)
+
 
     return (
     <SafeAreaView>
@@ -34,10 +38,45 @@ function ProfileScreen({navigation}) {
                  <TouchableOpacity style={ styles.logoutButton } activeOpacity={0.5}  onPress={()=>navigation.navigate('Home', { screen: 'PostsScreen' })}>
                    <Feather name="log-out" size={24} color="gray" />
                  </TouchableOpacity>
-               <Text style={ styles.title }>Natali Romanova</Text>      
-            { posts.map (el => 
-            <Post key={ el['id'] } img = { el['photo'] } text={ el['title'] } msgs = { 0 } location={ 'el.location' }/>      
-            )}
+               <Text style={ styles.title }>{ name }</Text>      
+               <View style={ { flex: 1,
+      justifyContent: "center" } }>
+
+        <FlatList 
+        data= { posts }
+        keyExtractor={(item, indx) => indx.toString()}
+        renderItem={({item}) => (
+          <View
+            style={{
+              marginTop: 20,
+              marginBottom: 30,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={{ uri: `${ item.photo }`}} 
+              style={{ width: 380, height: 280, borderRadius: 15 }}
+            />
+            <Text style={ styles.posText }>{ item.title }</Text>
+            <View style={ {display:'flex', justifyContent: 'space-between', flexDirection: "row", width: "85%"} }>
+            
+            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("Comments") }>
+              <Feather name="message-circle" size={18} color="gray" />
+              <Text>0</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={ styles.info } onPress={ ()=> navigation.navigate("Map", { location: item.location }) }>
+               <EvilIcons name="location" size={24} color="gray" />
+               <Text style={ styles.infolink }>{item.inputRegion}</Text>
+             </TouchableOpacity>
+             </View>
+          </View>
+          
+        )}
+        >
+        </FlatList>
+      </View >
             </View>  
         </View>
        </ImageBackground>
@@ -157,6 +196,22 @@ const styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 19,
       },
+      posText:{
+        alignSelf: "flex-start",
+        marginTop: 8,
+        marginLeft: 40,
+        fontWeight: "500",
+        fontSize: 16,
+     },
+     info:{
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginTop: 5,
+      padding: 10
+    },
+    infolink:{
+      textDecorationLine: "underline",
+    },
 });
 
 export default ProfileScreen;
