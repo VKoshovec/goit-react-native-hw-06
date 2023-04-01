@@ -6,7 +6,7 @@ const authInit = {
     name: '',
     user: '',
     uid: '',
-    isAuth: false,
+    isAuth: true,
     error: null,
     loading: false,
 };

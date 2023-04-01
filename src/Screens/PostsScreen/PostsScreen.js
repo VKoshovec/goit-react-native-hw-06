@@ -12,7 +12,6 @@ const NavigationPosts = () => {
     <PostNavigation.Navigator initialRouteName='PostList' screenOptions={{headerShown: false}}>
       <PostNavigation.Screen name='Post' component = { Post } />
       <PostNavigation.Screen name='PostList' component = { PostList } />
-      <PostNavigation.Screen name='Comments' component = { Comments } />
       <PostNavigation.Screen name='Map' component={ Map }></PostNavigation.Screen>
     </PostNavigation.Navigator>
   )

@@ -13,6 +13,12 @@ import { fetchGetAllPosts } from "../../Redux/posts/postsOperations";
 
 const LoginScreen = ({ navigation }) => {
 
+  const logedIn = useSelector(selectIsAuth);
+  
+  if(logedIn) {
+    navigation.navigate('Home', { screen: 'PostsScreen' })
+  }
+
   //state
   const [mail, setMail] =useState('');
   const [password, setPassword] =useState('');  
@@ -20,22 +26,8 @@ const LoginScreen = ({ navigation }) => {
   //redux  
   const dispatch = useDispatch();
 
-  // useEffect(()=>{
-  //   dispatch(fetchCurrentUser());
-  // },[dispatch]);
-
-
-  // useEffect(()=>{
-  //   dispatch(fetchCurrentUser()).then(result => {
-  //     result.type === "auth/fetchCurrentUser/fulfilled" && dispatch(fetchGetAllPosts());
-  //   });
-  // },[dispatch]);
-
-  // useSelector(selectIsAuth) && navigation.navigate('Home', { screen: 'PostsScreen' });
-  //redux//
-
-   const handleMail =(text)=>{ setMail(text)};
-   const handlePassword =(text)=>{ setPassword(text)};
+  const handleMail =(text)=>{ setMail(text)};
+  const handlePassword =(text)=>{ setPassword(text)};
    
 
   const register =()=> {
