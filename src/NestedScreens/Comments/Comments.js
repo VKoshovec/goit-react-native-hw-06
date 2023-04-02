@@ -1,35 +1,44 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList, ScrollView } from "react-native";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore"; 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { EvilIcons, Ionicons } from '@expo/vector-icons';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchGetCommentsByUid } from "../../Redux/comments/commentsOperations";
+import { db } from "../../Api/firebase";
+import { useSelector } from "react-redux";
+import { selectCommentsById, selectComments } from "../../Redux/comments/commentsSelectors";
 const img = require('../../Source/Rectangle23.png');
 
-const comments = [ {text: "evevevevvvvevevevee"}, { text: 'eveveeeevvev'} ];
+const Comments = ({navigation, route}) => {
 
-const Comments = ({navigation}) => {
+    const { postId, postImg } = route.params;
+    const allComments = useSelector(selectComments);
+    const comments = allComments.filter(item => item.postId === postId);
+
     return(
     <View style={ styles.postContainer }>
         <View style={ styles.postBody }>
             <Image
-            //   source={{ uri: `${ item.photo }`}} 
-              source={ img }
+              source={{ uri: `${ postImg }`}} 
               style={{ width: 380, height: 280, borderRadius: 15, marginTop: 15 }}
             />
-        </View>
+        <ScrollView style = { styles.commentList}>
         <FlatList 
         data= { comments }
         keyExtractor={(item, indx) => indx.toString()}
         renderItem={({item}) => (
             <View
-            style={{
-              marginBottom: 30,
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-                 <Text>{ item.text }</Text>
+            style={styles.commentBody}>
+                 <Text>{ item.postText }</Text>
             </View>
-          )}>
-        </FlatList> 
+          )}
+>
+        </FlatList>
+        </ScrollView> 
+        </View>
    </View>
    )};
    
@@ -38,6 +47,10 @@ const Comments = ({navigation}) => {
          justifyContent: "center",
          alignItems: "center", 
          backgroundColor: "#fff",
+     },
+     commentList:{
+      marginTop: 30,
+      width: "90%"
      },
      commentStyle:{
         width: "70%",
@@ -62,12 +75,18 @@ const Comments = ({navigation}) => {
         width: "100%",
         alignItems: "center", 
         flex: 10,
-        borderTopColor: '#E8E8E8', 
+        borderTopColor: '#E8E8E8',
+        borderRadius: 50, 
         borderTopWidth: 1
      },
      commentBody:{
         height: 80,
-        width: "90%"
+        backgroundColor: "#ff0",
+        width: "100%",
+        marginBottom: 30,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 50
      },
 
 

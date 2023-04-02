@@ -15,31 +15,24 @@ const postsSlise = createSlice({
     initialState: postsInit,
     extraReducers: builder => {
         builder
-        // .addCase(fetchAddPost.pending, (store) => {
-        //     store.error = null;
-        //     store.loading = true;
-        // })
-        // .addCase(fetchAddPost.fulfilled, (store, { payload }) => {
-        //     const { photo, title, location } = payload;
-        //     store.photo = photo;
-        //     store.title = title;
-        //     store.location = location;
-        //     store.error = null;
-        //     store.loading = false;
-        // })
-        // .addCase(fetchAddPost.rejected, (store, { payload }) => {
-        //     store.error = payload;
-        //     store.loading = false;
-        // })
+        .addCase(fetchAddPost.pending, (store) => {
+            store.error = null;
+            store.loading = true;
+        })
+        .addCase(fetchAddPost.fulfilled, (store, { payload }) => {
+            store.posts = payload;
+            store.error = null;
+            store.loading = false;
+        })
+        .addCase(fetchAddPost.rejected, (store, { payload }) => {
+            store.error = payload;
+            store.loading = false;
+        })
         .addCase(fetchGetAllPosts.pending, (store) => {
             store.error = null;
             store.loading = true;
         })
         .addCase(fetchGetAllPosts.fulfilled, (store, { payload }) => {
-            // const { photo, title, location } = payload;
-            // store.photo = photo;
-            // store.title = title;
-            // store.location = location;
             store.posts = payload;
             store.error = null;
             store.loading = false;

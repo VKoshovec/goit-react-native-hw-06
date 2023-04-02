@@ -9,6 +9,7 @@ import { useDispatch} from "react-redux";
 import { useEffect } from "react";
 import { fetchLogOutUser, } from "../../Redux/auth/authOperations";
 import { fetchGetAllPosts } from "../../Redux/posts/postsOperations";
+import { fetchGetAllComments } from "../../Redux/comments/commentsOperations";
 
 
 const BottomTabs = createBottomTabNavigator(); 
@@ -26,11 +27,13 @@ const Home = ({ navigation }) => {
   };
 
   useEffect(()=> {
+    dispatch(fetchGetAllComments()),
     dispatch(fetchGetAllPosts())
   },[dispatch]);
 
+
     return (
-        <BottomTabs.Navigator initialRouteName="Posts" 
+        <BottomTabs.Navigator initialRouteName="PostsScreen" 
         screenOptions={{
             tabBarShowLabel: false,
             tabBarStyle: { height: 80 }

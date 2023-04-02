@@ -59,16 +59,14 @@ const  CreatePost =({navigation})=> {
     }
 
     const inputTitlte = (text) => {
-
         setTitle(text);
-
     };
 
     const hendleCreate = async() => {
         if (!title || !location || !photoi) { alert("Enter all data pleace!!!"); return }
         const { payload } = await dispatch(fetchUploadPhoto(photoi));
         await dispatch(fetchAddPost({ photo: payload, title, inputRegion, location, uid }));
-        navigation.navigate('PostList', { photoi, location, inputRegion, title });     
+        navigation.navigate('PostList');    
     }
 
     return (

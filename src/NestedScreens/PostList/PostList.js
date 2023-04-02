@@ -3,12 +3,25 @@ import ProfileElement from "../../Elements/ProfileElement";
 import { Text, FlatList, View, Image, TouchableOpacity,  StyleSheet } from "react-native";
 import { Feather, EvilIcons } from '@expo/vector-icons'; 
 import { useSelector } from "react-redux";
+import { useState } from "react";
 import { selectAllPosts } from "../../Redux/posts/postsSelectors";
-import CommentsNav from "../../Screens/Navigation/CommentsNavigator";
+import { useEffect } from "react";
+import { selectComments, selectAllStore } from "../../Redux/comments/commentsSelectors";
+import { useDispatch } from "react-redux";
+import { fetchGetAllComments } from "../../Redux/comments/commentsOperations";
+
 
 const PostList = ({navigation}) => {
 
     const posts = useSelector(selectAllPosts);
+    const allComments = useSelector(selectComments);
+ 
+    console.log(allComments);
+
+    const getCommentsCount = (id) => {
+      const comcount = allComments.postId;
+      return comcount;
+    }
 
     return (<>
       <View style={ { flex: 1,
@@ -32,9 +45,9 @@ const PostList = ({navigation}) => {
             <Text style={ styles.posText }>{ item.title }</Text>
             <View style={ {display:'flex', justifyContent: 'space-between', flexDirection: "row", width: "85%"} }>
             
-            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("CommentsNav") }>
+            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("CommentsNav", { postId: item.id, postImg: item.photo })}>
               <Feather name="message-circle" size={18} color="gray" />
-              <Text>0</Text>
+              <Text>{ getCommentsCount(item.id) }</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={ styles.info } onPress={ ()=> navigation.navigate("Map", { location: item.location }) }>
@@ -42,8 +55,7 @@ const PostList = ({navigation}) => {
                <Text style={ styles.infolink }>{item.inputRegion}</Text>
              </TouchableOpacity>
              </View>
-          </View>
-          
+          </View>          
         )}
         >
         </FlatList>

@@ -7,11 +7,16 @@ export const fetchAddPost = createAsyncThunk('posts/fetchAddPost', async(data, t
         const docRef = await addDoc(collection(db, 'posts'), {
             ...data
          });
-         return docRef;    
+
+        const Docs = await getDocs(collection(db, 'posts'));
+        const result = [];
+        Docs.forEach((doc) => {
+           result.push({ id: doc.id , ...doc.data()});
+        });
+        return result;   
     } catch (error) {
         console.log(error);
     }
-    
 }); 
 
 export const fetchGetAllPosts = createAsyncThunk('posts/fetchGetAllPosts', async(_, thunkAPI) => {

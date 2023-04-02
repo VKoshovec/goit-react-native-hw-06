@@ -91,3 +91,40 @@
 //     {"id": "NKGU1z8YFeLKvJUUaZom", "location": {"latitude": 49.5499884, "longitude": 34.5104926}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680008582544?alt=media&token=be0f1535-a2e0-4c7f-b4f0-0f8d8d4f7d6c", "title": "Шаллляяяч"}, 
 //     {"id": "cwRK7MMLmmzz2n9YwtrE", "inputRegion": "Україна, Полтава", "location": {"latitude": 49.5780313, "longitude": 34.5156803}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680360539342?alt=media&token=370c0231-b261-48f9-8691-e14fdf0a527c", "title": "Member", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2"}, 
 //     {"id": "ibMiSg7OqM4tBEJWuaaC", "location": {"latitude": 49.5780236, "longitude": 34.5157059}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1679864822170?alt=media&token=986568c9-d79f-4d0b-8db3-7cddf1ab0754", "title": "Vuuiiviviviviii"}]
+
+
+// comments
+// {"_firestore": 
+// {"app": [FirebaseAppImpl],
+//  "databaseId": [Dt], 
+//  "settings": [wc]}, 
+//  "_snapshot": 
+//  {"docChanges": [[Object]],
+//   "docs": {"comparator": [Function anonymous],
+//    "keyedMap": [Un], "sortedSet": [Un]},
+//     "excludesMetadataChanges": false, 
+//     "fromCache": false,
+//     "mutatedKeys": {"comparator": [Function comparator], 
+//     "data": [Un]}, 
+//     "oldDocs": {"comparator": [Function anonymous], "keyedMap": [Un], "sortedSet": [Un]}, 
+//     "query": {"C": [_e], "D": [Array], "collectionGroup": null, "endAt": null, "explicitOrderBy": [Array], "filters": [Array], "limit": null, "limitType": "F", "path": [wt], "startAt": null}, 
+//     "syncStateChanged": true}, "_userDataWriter": {"firestore": [Object]}, "metadata": {"fromCache": false, "hasPendingWrites": false}, 
+//     "query": {"_query": {"C": [_e], "D": [Array], "collectionGroup": null, "endAt": null, "explicitOrderBy": [Array], "filters": [Array], "limit": null, "limitType": "F", "path": [wt], "startAt": null}, "converter": null, "firestore": [Object], "type": "query"}}
+
+
+// store
+{"auth": {"error": null, "isAuth": true, "loading": false, "name": "Kosha2", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2", "user": "k2@gmail.com"},
+ "comments": {"comments": [[Object], [Object], [Object], [Object], [Object], [Object]], "error": null, "loading": false},
+  "posts": {"error": null, "loading": false, "posts": [[Object], [Object], [Object], [Object], [Object], [Object]]}}
+
+  {"auth": {"error": null, "isAuth": true, "loading": false, "name": "Kosha2", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2", "user": "k2@gmail.com"},
+   "comments": {"comments": [[Object], [Object], [Object], [Object]], "error": null, "loading": false}, "posts": {"error": null, "loading": false,
+    "posts": [[Object], [Object], [Object], [Object]]}}
+
+
+    [{"id": "30VaneYQcOpJ2CcjxRQs", "inputRegion": "Україна, Полтава", "location": {"latitude": 49.5780623, "longitude": 34.5156757}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680442394873?alt=media&token=549b41c2-d823-4874-889d-2569bf4235ba", "title": "Komp", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2"}, 
+    {"id": "5l1624M36xYUOIOVoRVO", "inputRegion": "Україна, Полтава", "location": {"latitude": 49.5780365, "longitude": 34.5156804}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680442031148?alt=media&token=8739c865-bf6b-4591-a029-92a83b9f9056", "title": "Srach", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2"}, 
+    {"id": "MDEm7cnWApL84fIjzy0V", "inputRegion": "Україна, Полтава", "location": {"latitude": 49.5780614, "longitude": 34.5156784}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680441797443?alt=media&token=b02737ad-699a-4c62-ba3d-f98011996934", "title": "Homka", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2"}, 
+    {"id": "PQqJJHDZ7K74I8a7hyQy", "inputRegion": "Україна, Полтава", "location": {"latitude": 49.5780613, "longitude": 34.5156793}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680465525670?alt=media&token=66d72099-5e84-4a55-9d5b-b2d686f10035", "title": "Movie", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2"}, 
+    {"id": "u4FfFx0vfV7S78gdKH0I", "inputRegion": "Україна, Полтава", "location": {"latitude": 49.5780598, "longitude": 34.5156795}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680441437667?alt=media&token=5c467a8e-29a7-4f5a-8adf-e072ebc15d9e", "title": "Musha", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2"}, 
+    {"id": "yvbdbS1O3rWXnlf5NW2N", "inputRegion": "Україна, Полтава", "location": {"latitude": 49.5780332, "longitude": 34.5156815}, "photo": "https://firebasestorage.googleapis.com/v0/b/postsapp-7dee3.appspot.com/o/1680442467703?alt=media&token=b24bf486-ef37-47f5-b753-f0a52a7c6836", "title": "Piano", "uid": "CYlL2fISpYdb5YJnROBW1DgSHZx2"}]

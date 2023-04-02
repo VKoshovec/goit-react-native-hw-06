@@ -10,7 +10,7 @@ import AuthChack from './src/Elements/AuthChack';
 export default function App() { 
 
   return (
-  <Provider store= { store } >
+  <Provider store = { store } >
     <>
     <LoadingScreen/>
     <AuthChack>

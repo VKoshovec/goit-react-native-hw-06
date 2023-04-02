@@ -22,7 +22,6 @@ function ProfileScreen({navigation}) {
     const posts = useSelector(selectAuthPosts);
     const { name } = useSelector(selectUser)
 
-
     return (
     <SafeAreaView>
       <ScrollView>

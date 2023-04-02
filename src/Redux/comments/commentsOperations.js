@@ -4,19 +4,23 @@ import { db } from "../../Api/firebase";
 
 export const fetchAddComment = createAsyncThunk('posts/fetchAddPost', async(data, thunkAPI) => {
     try {
-        const docRef = await addDoc(collection(db, 'Comment'), {
+         await addDoc(collection(db, 'comments'), {
             ...data
          });
-         return docRef;    
+         const Docs = await getDocs(collection(db, 'comments'));
+         const result = [];
+         Docs.forEach((doc) => {
+            result.push({ id: doc.id , ...doc.data()});
+         });
+         return result;
     } catch (error) {
         console.log(error);
     }
-    
 }); 
 
-export const fetchGetCommentsByUid = createAsyncThunk('posts/fetchGetAllPosts', async(data, thunkAPI) => {
+export const fetchGetAllComments = createAsyncThunk('posts/fetchGetAllPosts', async(data, thunkAPI) => {
     try {
-        const Docs = await getDocs(collection(db, 'posts'));
+        const Docs = await getDocs(collection(db, 'comments'));
         const result = [];
         Docs.forEach((doc) => {
            result.push({ id: doc.id , ...doc.data()});
