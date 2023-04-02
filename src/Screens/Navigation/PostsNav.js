@@ -16,7 +16,9 @@ const PostsNav = ({navigation}) => {
                    options={{
                    tabBarIcon: () =>{
                    return <TouchableOpacity style={ styles.trashButton } activeOpacity={0.5} 
-                   onPress={()=>navigation.navigate('Home', { screen: 'PostsScreen' })}>
+                   onPress={ 
+                    ()=>navigation.navigate('Home', { screen: 'PostsScreen' }) 
+                    }>
                       <EvilIcons name="trash" size={24} color="black" />
                     </TouchableOpacity>
                    },

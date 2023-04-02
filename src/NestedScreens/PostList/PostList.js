@@ -4,6 +4,7 @@ import { Text, FlatList, View, Image, TouchableOpacity,  StyleSheet } from "reac
 import { Feather, EvilIcons } from '@expo/vector-icons'; 
 import { useSelector } from "react-redux";
 import { selectAllPosts } from "../../Redux/posts/postsSelectors";
+import CommentsNav from "../../Screens/Navigation/CommentsNavigator";
 
 const PostList = ({navigation}) => {
 
@@ -31,7 +32,7 @@ const PostList = ({navigation}) => {
             <Text style={ styles.posText }>{ item.title }</Text>
             <View style={ {display:'flex', justifyContent: 'space-between', flexDirection: "row", width: "85%"} }>
             
-            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("Comments") }>
+            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("CommentsNav") }>
               <Feather name="message-circle" size={18} color="gray" />
               <Text>0</Text>
             </TouchableOpacity>

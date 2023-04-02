@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 import PostsNav from './PostsNav';
 import ProfileScreen from '../ProfileScreen/ProfileScreen';
 import Comments from '../../NestedScreens/Comments/Comments';
+import CommentsNav from './CommentsNavigator';
 
 const MainStack = createStackNavigator();
 
@@ -16,7 +17,7 @@ const Navigation = () =>{
        <MainStack.Screen name='Home' component={Home}/> 
        <MainStack.Screen name='PostsNav' component={PostsNav}/> 
        <MainStack.Screen name='ProfileScreen' component={ProfileScreen}/> 
-       <MainStack.Screen name='Comments' component = { Comments } />
+       <MainStack.Screen name='CommentsNav' component = { CommentsNav } />
     </MainStack.Navigator>
   );
 };

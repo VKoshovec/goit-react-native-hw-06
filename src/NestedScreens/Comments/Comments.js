@@ -2,14 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { EvilIcons, Ionicons } from '@expo/vector-icons';
-const img = require('../../Source/Rectangle23.png')
+const img = require('../../Source/Rectangle23.png');
+
+const comments = [ {text: "evevevevvvvevevevee"}, { text: 'eveveeeevvev'} ];
 
 const Comments = ({navigation}) => {
     return(
     <View style={ styles.postContainer }>
-        <View style={ styles.postHeader }>
-            <Text style={ styles.postHeaderText }>Comments</Text>
-        </View>
         <View style={ styles.postBody }>
             <Image
             //   source={{ uri: `${ item.photo }`}} 
@@ -17,8 +16,19 @@ const Comments = ({navigation}) => {
               style={{ width: 380, height: 280, borderRadius: 15, marginTop: 15 }}
             />
         </View>
-        <FlatList>
-            <View style={ styles.commentBody }></View>
+        <FlatList 
+        data= { comments }
+        keyExtractor={(item, indx) => indx.toString()}
+        renderItem={({item}) => (
+            <View
+            style={{
+              marginBottom: 30,
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+                 <Text>{ item.text }</Text>
+            </View>
+          )}>
         </FlatList> 
    </View>
    )};
@@ -28,6 +38,10 @@ const Comments = ({navigation}) => {
          justifyContent: "center",
          alignItems: "center", 
          backgroundColor: "#fff",
+     },
+     commentStyle:{
+        width: "70%",
+        backgroundColor: "#ff0"
      },
      postHeader:{
         flex: 1,
@@ -45,7 +59,11 @@ const Comments = ({navigation}) => {
         marginTop: 20
      },
      postBody:{
+        width: "100%",
+        alignItems: "center", 
         flex: 10,
+        borderTopColor: '#E8E8E8', 
+        borderTopWidth: 1
      },
      commentBody:{
         height: 80,
