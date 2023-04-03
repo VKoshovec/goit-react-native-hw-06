@@ -7,11 +7,12 @@ const auth = getAuth(app);
 export const fetchRegisterUser = createAsyncThunk('auth/fetchRegisterUser', async(data, thunkAPI) =>{
  
     try {
-        const{ mail, password, login } = data;
+        const{ mail, password, login, photo } = data;
         const result = await createUserWithEmailAndPassword( auth, mail, password);
         result &&
         await updateProfile( auth.currentUser, {
-            displayName: login
+            displayName: login,
+            photoURL: photo,
         }); 
         return result.user;
     } catch (error) {
@@ -24,7 +25,6 @@ export const fetchLoginUser = createAsyncThunk('auth/fetchLoginUser', async(data
     try {
         const{ mail, password } = data;
         const result = await signInWithEmailAndPassword( auth, mail, password);
-        console.log(result._tokenResponse.localId)
         return result._tokenResponse;
         
     } catch (error) {

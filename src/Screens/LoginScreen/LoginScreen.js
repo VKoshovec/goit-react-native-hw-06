@@ -57,11 +57,11 @@ const LoginScreen = ({ navigation }) => {
                   <Text style={ styles.passwShowText }>Show</Text>
                 </TouchableOpacity>  
 
-                <TouchableOpacity style={ styles.registerButton } activeOpacity={0.5} onPress={register}>
+                <TouchableOpacity style={ styles.registerButton } activeOpacity={0.5} onPress={ () => { register() } }>
                   <Text style={ styles.registerButtonText }>Login</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5} onPress={() => navigation.navigate("Registratione")}>
+                <TouchableOpacity style={ styles.loginLink } activeOpacity={0.5} onPress={() => navigation.navigate("Registratione", {})}>
                   <Text style={ styles.loginLinkText }>Don't have an account? Register</Text>
                 </TouchableOpacity> 
 

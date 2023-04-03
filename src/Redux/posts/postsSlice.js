@@ -2,9 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchAddPost, fetchGetAllPosts } from "./postsOperations";
 
 const postsInit = {
-    // photo: '',
-    // title: '',
-    // location: {},
     posts: [],
     error: null,
     loading: false,
@@ -13,7 +10,7 @@ const postsInit = {
 const postsSlise = createSlice({
     name: 'posts',
     initialState: postsInit,
-    extraReducers: builder => {
+    extraReducers: (builder) => {
         builder
         .addCase(fetchAddPost.pending, (store) => {
             store.error = null;
@@ -44,4 +41,4 @@ const postsSlise = createSlice({
     }
 });
 
-export default postsSlise;
+export default postsSlise.reducer;

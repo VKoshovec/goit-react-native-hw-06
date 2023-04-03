@@ -27,7 +27,6 @@ const  CreatePost =({navigation})=> {
 
     const uid = useSelector(selectUserId);
 
-
     useEffect(() => {
         (async () => {
 

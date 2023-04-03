@@ -1,12 +1,12 @@
-import { combineReducers } from "redux";
-import authSlise from "./auth/authSlice"
-import postsSlise from "./posts/postsSlice";
-import commentsSlice from "./comments/commentsSlice";
+import { combineReducers } from "@reduxjs/toolkit";
+import authSliseReduser from "./auth/authSlice"
+import postsSliseReduser from "./posts/postsSlice";
+import commentsSliceReduser from "./comments/commentsSlice";
 
 const combineReducer = combineReducers ({
-    auth: authSlise.reducer,
-    posts: postsSlise.reducer,
-    comments: commentsSlice.reducer,
+    auth: authSliseReduser,
+    posts: postsSliseReduser,
+    comments: commentsSliceReduser,
 });
 
 export default combineReducer;

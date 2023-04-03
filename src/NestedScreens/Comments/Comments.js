@@ -25,19 +25,45 @@ const Comments = ({navigation, route}) => {
               source={{ uri: `${ postImg }`}} 
               style={{ width: 380, height: 280, borderRadius: 15, marginTop: 15 }}
             />
-        <ScrollView style = { styles.commentList}>
+        <View style = { styles.commentList}>
         <FlatList 
         data= { comments }
         keyExtractor={(item, indx) => indx.toString()}
-        renderItem={({item}) => (
-            <View
-            style={styles.commentBody}>
-                 <Text>{ item.postText }</Text>
-            </View>
+        renderItem={({item, id}) => (
+          <View style={{ display: "flex", flexDirection: "row", alignItems: 'flex-start', justifyContent: 'space-around', marginBottom: 30 }}>
+            { (comments.indexOf(item)% 2 == 0)? 
+            <>
+              <View style = {{ borderRadius: "50%" }}>
+                 <Image source={{ uri: `${ item.userPhoto }`}} style={{ width: 40, height: 40, borderRadius: 25, margin: 0, padding: 0 }}/>
+              </View>
+              <View style={styles.commentBody}>
+                 <Text >{ item.postText }</Text>
+              </View>
+            </>: 
+            <>
+              <View style={styles.commentBody}>
+                 <Text >{ item.postText }</Text>
+              </View>
+              <View style = {{ borderRadius: "50%" }}>
+                 <Image source={{ uri: `${ item.userPhoto }`}} style={{ width: 40, height: 40, borderRadius: 25, margin: 0, padding: 0 }}/>
+              </View>
+            </>}
+          </View>
           )}
 >
         </FlatList>
-        </ScrollView> 
+        </View>
+        {/* </ScrollView>  (comments.indexOf(item))? {<View style = {{ borderRadius: "50%" }}>
+                 <Image source={{ uri: `${ item.userPhoto }`}} style={{ width: 40, height: 40, borderRadius: 25, margin: 0, padding: 0 }}/>
+            </View>
+
+            <View style={styles.commentBody}>
+                 <Text >{ item.postText }</Text>
+            </View>} : <View style={styles.commentBody}>
+                 <Text >{ item.postText }</Text>
+            </View><View style = {{ borderRadius: "50%" }}>
+                 <Image source={{ uri: `${ item.userPhoto }`}} style={{ width: 40, height: 40, borderRadius: 25, margin: 0, padding: 0 }}/>
+            </View>*/}
         </View>
    </View>
    )};
@@ -50,7 +76,9 @@ const Comments = ({navigation, route}) => {
      },
      commentList:{
       marginTop: 30,
-      width: "90%"
+      width: "90%",
+      flex: 1,
+      justifyContent: "center"
      },
      commentStyle:{
         width: "70%",
@@ -80,10 +108,10 @@ const Comments = ({navigation, route}) => {
         borderTopWidth: 1
      },
      commentBody:{
-        height: 80,
-        backgroundColor: "#ff0",
-        width: "100%",
-        marginBottom: 30,
+        minHeight: 60,
+        backgroundColor: "#00000008",
+        width: "80%",
+        paddingBottom: 0,
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 50

@@ -1,17 +1,19 @@
 import { StyleSheet, Text, ImageBackground,
    View, TouchableOpacity, TextInput, KeyboardAvoidingView, 
-   Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
+   Platform, TouchableWithoutFeedback, Keyboard, Image } from "react-native";
 import React, { useState } from "react";
 import { StatusBar  } from 'expo-status-bar';
 const backImage = require('../../Source/Photo_BG.png');
 import { useDispatch } from "react-redux";
 import { fetchRegisterUser } from "../../Redux/auth/authOperations";
+import { AntDesign } from '@expo/vector-icons'; 
 
 
 const buttonImg = require('./add.png');
 
-const RegistrationScreen = ({ navigation }) => {
+const RegistrationScreen = ({  navigation, route }) => {
 
+   const { photo } = route.params;
    const dispatch = useDispatch();
 
    const [login, setLogin] =useState('');
@@ -24,12 +26,14 @@ const RegistrationScreen = ({ navigation }) => {
 
    const register =()=> {
     if (!login || !mail || !password) { alert("Enter all data pleace!!!"); return }
-    dispatch(fetchRegisterUser({ mail, password, login }))
+    dispatch(fetchRegisterUser({ mail, password, login, photo }))
     .then(result => {
       result.type ==='auth/fetchRegisterUser/fulfilled' && navigation.navigate('Home', { screen: 'PostsScreen' })
       result.type !=='auth/fetchRegisterUser/fulfilled' && alert('Incorrect registration!!!')
     });
    }
+
+   const takePhoto = () => { navigation.navigate('ProfilePhotoScreen') }
 
    const passwShow =()=> alert(`Your password is: ${password}`);
 
@@ -40,10 +44,13 @@ const RegistrationScreen = ({ navigation }) => {
       <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ styles.containerKeyB } >
        <View style={ styles.container }>
         <View style={ styles.pfotoContainer }>
-           <TouchableOpacity style={ styles.addbutton } activeOpacity={0.5}>
-              <ImageBackground source={buttonImg} style={{width: '100%', height: '100%'}}></ImageBackground>
-           </TouchableOpacity>
+           {(photo)&&<Image source={{ uri: `${ photo }`}} style = { styles.photoProf }/>}
+           
         </View>
+        <TouchableOpacity style={ styles.addbutton } activeOpacity={0.5} onPress={()=>{ takePhoto() }}>
+              {/* <ImageBackground source={buttonImg} style={{width: '100%', height: '100%'}}></ImageBackground> */}
+              <AntDesign name="pluscircleo" size={24} color="red" />
+           </TouchableOpacity>
         <Text style={ styles.title }>Registration</Text>
   
         <TextInput style={ styles.inputLogin } placeholder="Login" inputMode="text" value={ login } onChangeText={handleLogin}/>
@@ -76,6 +83,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   }, 
+  photoProf: {
+    width: '100%',
+    height: '100%',
+    overflow: "hidden",
+    alignSelf: "center"
+  },
   backImg: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -92,18 +105,19 @@ const styles = StyleSheet.create({
       justifyContent: "flex-end",
     },
     pfotoContainer: {
+      position: "relative",
       marginTop: -60,
       height: 120,
       width: 120,
       backgroundColor: '#F6F6F6',
       borderRadius: 16,
+      overflow: "hidden",
     },
 
     addbutton: {
-      marginTop: '65%',
-      left: '90%',
-      height: 25,
-      width: 25,
+      position: 'absolute',
+      left: '62%',
+      top: 10,
       pointerEvents: "auto",
     },
     title: {

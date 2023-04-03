@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAddComment, fetchGetAllComments } from "../../Redux/comments/commentsOperations";
-import { selectUserId } from "../../Redux/auth/authSelectors";
+import { selectUserId, selectUserPhoto } from "../../Redux/auth/authSelectors";
 
 
 const CommentsTabs = createBottomTabNavigator();
@@ -17,6 +17,7 @@ const CommentsNav = ({ navigation, route }) => {
     
     const [postText, setPostText] = useState("");
 
+    const userPhoto = useSelector(selectUserPhoto);
     const uid = useSelector(selectUserId);
     const { postId, postImg } = route.params;
 
@@ -25,7 +26,8 @@ const CommentsNav = ({ navigation, route }) => {
 
     const setComment = () => {
       if(postText){
-        dispatch(fetchAddComment( { postId, postText, uid } ));
+        dispatch(fetchAddComment( { postId, postText, uid, userPhoto } ));
+        setPostText("")
         return;
       }
       alert("Comment text is empty");

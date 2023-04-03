@@ -27,7 +27,7 @@ const Home = ({ navigation }) => {
   };
 
   useEffect(()=> {
-    dispatch(fetchGetAllComments()),
+    dispatch(fetchGetAllComments())
     dispatch(fetchGetAllPosts())
   },[dispatch]);
 

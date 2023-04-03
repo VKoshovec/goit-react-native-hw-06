@@ -6,30 +6,35 @@ const backImage = require('../../Source/Photo_BG.png');
 const buttonImg = require('../RegistrationScreen/add.png');
 const profilePhoto = require('../../Source/Rectangle22.png');
 
-const postImg = require('../../Source/Rectangle23.png');
-import Post from "../../Elements/Post";
 import { useSelector } from "react-redux";
 import { selectAuthPosts } from "../../Redux/posts/postsSelectors";
 import { selectUser } from "../../Redux/auth/authSelectors";
-import PostList from "../../NestedScreens/PostList/PostList";
-import ProfileElement from "../../Elements/ProfileElement";
+import { selectComments } from "../../Redux/comments/commentsSelectors";
 
 const BottomTabsProf = createBottomTabNavigator(); 
 
 
 function ProfileScreen({navigation}) {
+
+  const allComments = useSelector(selectComments);
+
+  const getCommentsCount = (id) => {
+    const comcount = allComments.filter(item=> item.postId === id).length;
+    return comcount;
+  }
+
    
     const posts = useSelector(selectAuthPosts);
-    const { name } = useSelector(selectUser)
+    const { name, photo } = useSelector(selectUser);
 
     return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView >
        <ImageBackground source={backImage} style={styles.backImg}> 
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <View style={ styles.container }>
                <View style={ styles.pfotoContainer }>
-                 <ImageBackground source={profilePhoto} style={{width: '100%', height: '100%'}}></ImageBackground>
+                 <Image source={{ uri: `${ photo }`}} style={{width: '100%', height: '100%', borderRadius: 15 }}></Image>
                  <TouchableOpacity style={ styles.addbutton } activeOpacity={0.5}>
                    <ImageBackground source={buttonImg} style={{width: '100%', height: '100%'}}></ImageBackground>
                  </TouchableOpacity>
@@ -38,9 +43,8 @@ function ProfileScreen({navigation}) {
                    <Feather name="log-out" size={24} color="gray" />
                  </TouchableOpacity>
                <Text style={ styles.title }>{ name }</Text>      
-               <View style={ { flex: 1,
-      justifyContent: "center" } }>
-
+      <View style={{ flex: 1, justifyContent: "center" } }>
+        
         <FlatList 
         data= { posts }
         keyExtractor={(item, indx) => indx.toString()}
@@ -60,9 +64,9 @@ function ProfileScreen({navigation}) {
             <Text style={ styles.posText }>{ item.title }</Text>
             <View style={ {display:'flex', justifyContent: 'space-between', flexDirection: "row", width: "85%"} }>
             
-            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("Comments") }>
+            <TouchableOpacity style={ styles.info } onPress={ () => navigation.navigate("CommentsNav", { postId: item.id, postImg: item.photo }) }>
               <Feather name="message-circle" size={18} color="gray" />
-              <Text>0</Text>
+              <Text>{ getCommentsCount( item.id ) }</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={ styles.info } onPress={ ()=> navigation.navigate("Map", { location: item.location }) }>
@@ -70,8 +74,7 @@ function ProfileScreen({navigation}) {
                <Text style={ styles.infolink }>{item.inputRegion}</Text>
              </TouchableOpacity>
              </View>
-          </View>
-          
+          </View>   
         )}
         >
         </FlatList>

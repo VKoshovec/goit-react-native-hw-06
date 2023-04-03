@@ -3,29 +3,22 @@ import ProfileElement from "../../Elements/ProfileElement";
 import { Text, FlatList, View, Image, TouchableOpacity,  StyleSheet } from "react-native";
 import { Feather, EvilIcons } from '@expo/vector-icons'; 
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import { selectAllPosts } from "../../Redux/posts/postsSelectors";
-import { useEffect } from "react";
-import { selectComments, selectAllStore } from "../../Redux/comments/commentsSelectors";
-import { useDispatch } from "react-redux";
-import { fetchGetAllComments } from "../../Redux/comments/commentsOperations";
+import { selectComments } from "../../Redux/comments/commentsSelectors";
 
 
 const PostList = ({navigation}) => {
 
     const posts = useSelector(selectAllPosts);
     const allComments = useSelector(selectComments);
- 
-    console.log(allComments);
 
     const getCommentsCount = (id) => {
-      const comcount = allComments.postId;
+      const comcount = allComments.filter(item=> item.postId === id).length;
       return comcount;
     }
 
     return (<>
-      <View style={ { flex: 1,
-      justifyContent: "center" } }>
+      <View style={ { flex: 1, justifyContent: "center" } }>
         <ProfileElement />
         <FlatList 
         data= { posts }

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore"; 
 import { db } from "../../Api/firebase";
 
-export const fetchAddComment = createAsyncThunk('posts/fetchAddPost', async(data, thunkAPI) => {
+export const fetchAddComment = createAsyncThunk('comments/fetchAddComment', async(data, thunkAPI) => {
     try {
          await addDoc(collection(db, 'comments'), {
             ...data
@@ -18,7 +18,7 @@ export const fetchAddComment = createAsyncThunk('posts/fetchAddPost', async(data
     }
 }); 
 
-export const fetchGetAllComments = createAsyncThunk('posts/fetchGetAllPosts', async(data, thunkAPI) => {
+export const fetchGetAllComments = createAsyncThunk('comments/fetchGetAllComments', async(data, thunkAPI) => {
     try {
         const Docs = await getDocs(collection(db, 'comments'));
         const result = [];

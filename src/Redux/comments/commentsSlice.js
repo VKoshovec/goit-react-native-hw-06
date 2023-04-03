@@ -10,7 +10,7 @@ const commentsInit = {
 const commentsSlice = createSlice({
     name: "comments",
     initialState: commentsInit,
-    extraReducers: builder => {
+    extraReducers: (builder) => {
         builder
         .addCase(fetchGetAllComments.pending, (store) => {
             store.error = null;
@@ -41,4 +41,4 @@ const commentsSlice = createSlice({
     }
 });
 
-export default commentsSlice;
+export default commentsSlice.reducer;

@@ -6,6 +6,7 @@ const authInit = {
     name: '',
     user: '',
     uid: '',
+    photo: '',
     isAuth: false,
     error: null,
     loading: false,
@@ -14,17 +15,18 @@ const authInit = {
 const authSlise = createSlice({
     name: 'auth',
     initialState: authInit,
-    extraReducers: builder => {
+    extraReducers: (builder) => {
         builder
         .addCase(fetchRegisterUser.pending, (store) => {
             store.error = null;
             store.loading = true;
         })
         .addCase(fetchRegisterUser.fulfilled, (store, { payload }) => {
-            const { uid, email, displayName } = payload;
+            const { uid, email, displayName, photoURL } = payload;
             store.name = displayName;
             store.user = email;
             store.uid = uid;
+            store.photo = photoURL;
             store.error = null;
             store.loading = false;
             store.isAuth = true;
@@ -39,10 +41,11 @@ const authSlise = createSlice({
             store.loading = true;
         })
         .addCase(fetchLoginUser.fulfilled, (store, { payload }) => {
-            const {  email, displayName, localId } = payload;
+            const {  email, displayName, localId, profilePicture } = payload;
             store.name = displayName;
             store.user = email;
             store.uid = localId;
+            store.photo = profilePicture;
             store.error = null;
             store.loading = false;
             store.isAuth = true;
@@ -66,6 +69,7 @@ const authSlise = createSlice({
                 store.user = user.email;
                 store.name = user.displayName;
                 store.uid = user.uid;
+                store.photo = user.photoURL;
                 store.error = null;
                 store.loading = false;
                 store.isAuth = true;
@@ -97,4 +101,4 @@ const authSlise = createSlice({
     }
 });
 
-export default authSlise;
+export default authSlise.reducer;
